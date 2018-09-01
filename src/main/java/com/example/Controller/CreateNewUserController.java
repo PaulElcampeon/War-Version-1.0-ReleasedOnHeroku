@@ -54,7 +54,15 @@ public class CreateNewUserController {
     }
 
     private void createNewAvatar(HttpServletResponse res) throws IOException {
-        Warrior userAvatar = new Warrior(clientsUsername,100, password, clientsImageUrl);
+
+        Warrior userAvatar;
+
+        if (this.clientsImageUrl.equalsIgnoreCase("")) {
+            userAvatar = new Warrior(clientsUsername, password);
+            System.out.println("USER HAD NO IMAGE");
+        } else {
+             userAvatar = new Warrior(clientsUsername,100, password, clientsImageUrl);
+        }
         setOnlineAndSetLastActive(userAvatar);
         warriorDaoServiceImplementation.addObject(userAvatar);
         System.out.println("WE HAVE JUST CREATED A NEW USER "+userAvatar);

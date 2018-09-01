@@ -53,6 +53,11 @@ public class Warrior {
 
     public Warrior() {}
 
+    public Warrior(String name, String password) {
+        this.password = password;
+        this.name = name;
+    }
+
     public Warrior(String name, int healthPoints) {
         this.name = name;
         this.healthPoints = healthPoints;
