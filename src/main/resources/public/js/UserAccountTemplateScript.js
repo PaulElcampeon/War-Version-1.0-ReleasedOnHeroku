@@ -528,11 +528,10 @@ function checkIfOperationIsComplete() {
 
     console.log("SENDING REQUEST TO CHECK IF ACTIVE OPERATION IS COMPLETE");
 
-    if (data != undefined) {
-        let url = "https://war-version-0.herokuapp.com/operationComplete/" + warriorData.name;
+       let url = "https://war-version-0.herokuapp.com/operationComplete/" + warriorData.name;
 
         fetch(url, {
-            method:'POST',
+            method:'GET',
             mode: 'no-cors',
             //body: JSON.stringify(data),
             headers:{
@@ -546,7 +545,6 @@ function checkIfOperationIsComplete() {
                 console.log(data);
                 directResponse(data);
             })
-    }
 }
 
 

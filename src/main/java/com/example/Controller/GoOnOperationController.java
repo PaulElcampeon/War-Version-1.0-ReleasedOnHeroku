@@ -57,7 +57,7 @@ public class GoOnOperationController {
         }
     }
 
-    @RequestMapping(value = "/operationComplete/{playerName}",method=RequestMethod.POST)
+    @RequestMapping(value = "/operationComplete/{playerName}",method=RequestMethod.GET)
     public void checkIfOperationIsComplete(HttpServletResponse res, HttpServletRequest req) throws IOException {
         servletPath = req.getServletPath().split("/");
         String playerName = servletPath[2];
