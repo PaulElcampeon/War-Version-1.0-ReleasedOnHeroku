@@ -1,6 +1,5 @@
 package com.example.Controller;
 
-
 import com.example.Models.Other.InitializeResponse;
 import com.example.Models.Other.LocationPrinter;
 import com.example.Services.LoginServices.LoginServiceImplementation;

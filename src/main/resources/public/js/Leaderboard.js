@@ -130,7 +130,7 @@ function getWarriorsList() {
 
     console.log("GETTING WARRIOR LIST");
 
-    let url = 'https://intense-peak-18063.herokuapp.com/api/getAll/warrior/' + lowerLimit;
+    let url = 'https://war-version-0.herokuapp.com/api/getAll/warrior/' + lowerLimit;
 
     fetch(url, {
         method:'GET'

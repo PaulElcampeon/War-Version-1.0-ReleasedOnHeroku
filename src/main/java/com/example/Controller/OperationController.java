@@ -1,6 +1,5 @@
 package com.example.Controller;
 
-
 import com.example.Models.OperationSection.Operation.Operation;
 import com.example.Models.OperationSection.OperationGenerator.OperationGenerator;
 import com.example.Models.Other.InitializeResponse;

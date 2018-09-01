@@ -5,7 +5,7 @@ document.getElementById("createWeaponBtn").addEventListener("click",()=>{
     let weaponTopDamage = document.getElementById("weaponTopDamage").value;
     let weaponBottomDamage = document.getElementById("weaponBottomDamage").value;
     let weaponImageUrl = document.getElementById("weaponImageUrl").value;
-    let url = 'https://intense-peak-18063.herokuapp.com/api/add/weapon';
+    let url = 'https://war-version-0.herokuapp.com/api/add/weapon';
     let weaponData = {name:weaponName, topDamage:weaponTopDamage, bottomDamage:weaponBottomDamage, imageUrl: weaponImageUrl};
     let weaponDataAsString = JSON.stringify(weaponData);
     (weaponTopDamage=="" || weaponBottomDamage=="" || weaponName.length==0 || weaponImageUrl.length==0) ? alert("You left some fields empty") : createWeapon(url,weaponDataAsString);

@@ -81,7 +81,7 @@ function direction(data) {
 
 function goOnOperation(data) {
 
-    let url = "https://intense-peak-18063.herokuapp.com/GoOnOperation/" + warriorData.name + "/" + operationData.name;
+    let url = "https://war-version-0.herokuapp.com/GoOnOperation/" + warriorData.name + "/" + operationData.name;
 
     fetch(url, {
         method: 'POST',
@@ -101,7 +101,7 @@ function goOnOperation(data) {
 
 function saveUserDetails(data) {
 
-    let url = 'https://intense-peak-18063.herokuapp.com/api/update/warrior';
+    let url = 'https://war-version-0.herokuapp.com/api/update/warrior';
 
     fetch(url, {
         method:'PUT',

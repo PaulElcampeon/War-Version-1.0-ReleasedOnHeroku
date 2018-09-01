@@ -147,7 +147,7 @@ function logout() {
 
 function saveUserDetails(data) {
 
-    let url = 'https://intense-peak-18063.herokuapp.com/api/update/warrior';
+    let url = 'https://war-version-0.herokuapp.com/api/update/warrior';
 
     fetch(url, {
         method:'PUT',

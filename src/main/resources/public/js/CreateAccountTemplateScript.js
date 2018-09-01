@@ -30,7 +30,7 @@ function checkData(data) {
 
 function createAccount(data) {
 
-    let url = 'https://intense-peak-18063.herokuapp.com/createUser';
+    let url = 'https://war-version-0.herokuapp.com/createUser';
 
     fetch(url, {
         method: 'POST', // or 'PUT'

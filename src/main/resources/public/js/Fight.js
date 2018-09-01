@@ -247,7 +247,7 @@ function getUserDetails(id, type) {
     console.log("USERS NAME");
     console.log(id);
 
-    let url = "https://intense-peak-18063.herokuapp.com/api/get/warrior/" + id;
+    let url = "https://war-version-0.herokuapp.com/api/get/warrior/" + id;
 
     fetch(url, {
         method:'GET',
@@ -284,7 +284,7 @@ function fight(data) {
 
     console.log("INITIALIZING FIGHT");
 
-    let url = 'https://intense-peak-18063.herokuapp.com/battle/fight';
+    let url = 'https://war-version-0.herokuapp.com/battle/fight';
 
     fetch(url, {
         method:'POST',
