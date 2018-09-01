@@ -718,7 +718,7 @@ function checkIfElixirHasRunOut(data){
     let url = "https://war-version-0.herokuapp.com/check/elixir/";
 
     fetch(url, {
-        method: 'PUT',
+        method: 'POST',
         mode: 'no-cors',
         body: JSON.stringify(data),
         headers:{

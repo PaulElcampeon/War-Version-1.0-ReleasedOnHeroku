@@ -76,11 +76,9 @@ public class ItemServiceController {
         res.getWriter().write(userAvatarJSON);
     }
 
-    @RequestMapping(value="check/elixir", method= RequestMethod.PUT)
+    @RequestMapping(value="check/elixir", method= RequestMethod.POST)
     public void checkIfElixirAffectHasRunOut(@RequestBody Warrior warrior, HttpServletRequest req, HttpServletResponse res) throws IOException {
         LocationPrinter.printLocation("CHECK IF ELIXIR HAS RUN OUT");
-//        Warrior warrior1 = new Warrior();
-//        warrior1 = warrior;
         if (warrior.getElixirAmount() != 0) {
             System.out.println("WARRIOR HAS ELIXIR AMOUNT");
             CheckIfElixirHasRunOut.check(warrior);
