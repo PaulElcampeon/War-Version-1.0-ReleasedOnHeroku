@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>War|Home</title>
+    <link href="css/WarStyling.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="bodyDiv">
+
+        <div class="title">
+            <h1>WAR</h1>
+        </div>
+
+
+        <div>
+            <button id="playAudioBtn">&#9835</button>
+        </div>
+
+
+        <div id="loginDiv">
+            <input id="user" input type="text" name="username" placeholder="USERNAME"><br><br>
+            <input id="pass" type="password" name="password" placeholder="PASSWORD"><br><br>
+            <p id="passwordIncorrectWarning">PASSWORD INCORRECT</p><br><br>
+            <button id="login">LOG IN</button><br>
+            <button id="createAccount">Create Account</button>
+        </div>
+
+    </div>
+
+    <audio id="audio1" loop>
+        <source src="media/Music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <audio id="buttonClick">
+        <source src="media/SSE1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="js/HomeScript.js" type="text/javascript"></script>
+</body>
+</html>
