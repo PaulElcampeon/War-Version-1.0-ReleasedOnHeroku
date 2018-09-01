@@ -48,7 +48,7 @@ function logout(){
         alert("NO OTHER USER DATA")
     }
 
-    location.href = './Home.html'
+    location.href = './index.html'
  }
 
 ///////////////////////////////////////////////////////////////////////////////////////

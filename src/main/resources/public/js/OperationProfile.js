@@ -54,7 +54,7 @@ function logout() {
          catch(err) {
              alert("NO OTHER USER DATA");
          }
-    location.href = './Home.html'
+    location.href = './index.html'
 }
 
 

@@ -71,7 +71,7 @@ function saveUserDetails(data) {
         .then((data) => {
             sessionStorage.removeItem("warriorData");
             sessionStorage.removeItem("otherUser");
-            location.href = './Home.html'
+            location.href = './index.html'
         })
 }
 

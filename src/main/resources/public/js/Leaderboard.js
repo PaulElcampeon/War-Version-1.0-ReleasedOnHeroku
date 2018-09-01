@@ -118,7 +118,7 @@ function logout() {
 
      }
 
-     location.href = './Home.html';
+     location.href = './index.html';
  }
 
 ///////////////////////////////////////////////////////////////////////////////////////

@@ -5,7 +5,7 @@ document.getElementById("createWeaponBtn").addEventListener("click",()=>{
     let weaponTopDamage = document.getElementById("weaponTopDamage").value;
     let weaponBottomDamage = document.getElementById("weaponBottomDamage").value;
     let weaponImageUrl = document.getElementById("weaponImageUrl").value;
-    let url = 'https://war-version-1-point-0-proto.herokuapp.com/api/add/weapon';
+    let url = 'https://intense-peak-18063.herokuapp.com/api/add/weapon';
     let weaponData = {name:weaponName, topDamage:weaponTopDamage, bottomDamage:weaponBottomDamage, imageUrl: weaponImageUrl};
     let weaponDataAsString = JSON.stringify(weaponData);
     (weaponTopDamage=="" || weaponBottomDamage=="" || weaponName.length==0 || weaponImageUrl.length==0) ? alert("You left some fields empty") : createWeapon(url,weaponDataAsString);
@@ -36,7 +36,7 @@ document.getElementById("createOperationBtn").addEventListener("click",()=>{
     let operationImageUrl = document.getElementById("OperationImageUrl").value;
     let operationPrizeType = document.getElementById("OperationPrizeType").value;
     let operationChanceOfSuccess = document.getElementById("OperationChanceOfSuccess").value;
-    let url = 'https://war-version-1-point-0-proto.herokuapp.com/api/add/operation';
+    let url = 'https://intense-peak-18063.herokuapp.com/api/add/operation';
     let operationData = {name:operationName, level:operationLevel, experience:operationExperience, duration:operationDuration, imageUrl:operationImageUrl, money:operationMoney, chanceOfSuccess:operationChanceOfSuccess, prizeType:operationPrizeType};
     let operationDataAsString = operationData;
     console.log(operationDataAsString);
