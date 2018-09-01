@@ -88,6 +88,6 @@ public class CreateNewUserController {
 
     private void setOnlineAndSetLastActive(Warrior warrior) {
         warrior.setOnline(true);
-        warrior.setLastActive(Calendar.getInstance().getTime().getTime());
+        warrior.setLastActive(String.valueOf(Calendar.getInstance().getTime().getTime()));
     }
 }
