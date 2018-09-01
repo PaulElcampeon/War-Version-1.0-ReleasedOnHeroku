@@ -526,10 +526,11 @@ function checkIfOperationIsComplete(data) {
 
     console.log("SENDING REQUEST TO CHECK IF ACTIVE OPERATION IS COMPLETE");
 
-    let url = "https://intense-peak-18063.herokuapp.com/operationComplete/" + warriorData.name;
+    let url = "https://war-version-0.herokuapp.com/operationComplete/" + warriorData.name;
 
     fetch(url, {
         method:'POST',
+        mode: 'no-cors',
         body: JSON.stringify(data),
         headers:{
             'Content-Type': 'application/json'
@@ -549,7 +550,7 @@ function getWarriorsList() {
 
     console.log("GETTING WARRIOR LIST");
 
-    let url = 'https://intense-peak-18063.herokuapp.com/api/getAll/warrior';
+    let url = 'https://war-version-0.herokuapp.com/api/getAll/warrior';
 
     fetch(url, {
         method:'GET'
@@ -570,7 +571,7 @@ function getWarriorsListExcept(name) {
 
     console.log("GETTING WARRIOR LIST");
 
-    let url = 'https://intense-peak-18063.herokuapp.com/api/getAll/warrior/except/' + name;
+    let url = 'https://war-version-0.herokuapp.com/api/getAll/warrior/except/' + name;
 
     fetch(url, {
         method:'GET'
@@ -588,7 +589,7 @@ function getWarriorsListExcept(name) {
 
 function saveUserDetails(data) {
 
-    let url = 'https://intense-peak-18063.herokuapp.com/api/update/warrior';
+    let url = 'https://war-version-0.herokuapp.com/api/update/warrior';
 
     fetch(url, {
         method:'PUT',
@@ -614,7 +615,7 @@ function heal(data) {
 
     console.log("HEALING WARRIOR");
 
-    let url = "https://intense-peak-18063.herokuapp.com/hospital/fullheal";
+    let url = "https://war-version-0.herokuapp.com/hospital/fullheal";
 
     fetch(url, {
         method:'POST',
@@ -639,7 +640,7 @@ function equipArmour(data, armourPosition) {
 
     console.log("EQUIPPING ARMOUR");
 
-    let url = "https://intense-peak-18063.herokuapp.com/equip/armour/" + armourPosition;
+    let url = "https://war-version-0.herokuapp.com/equip/armour/" + armourPosition;
 
     fetch(url, {
         method:'PUT',
@@ -664,7 +665,7 @@ function equipWeapon(data, weaponPosition) {
 
     console.log("EQUIPPING WEAPON");
 
-    let url = "https://intense-peak-18063.herokuapp.com/equip/weapon/" + weaponPosition;
+    let url = "https://war-version-0.herokuapp.com/equip/weapon/" + weaponPosition;
 
     fetch(url, {
         method:'PUT',
@@ -689,7 +690,7 @@ function useElixir(data, elixirPosition){
 
     console.log("USING ELIXIR");
 
-    let url = "https://intense-peak-18063.herokuapp.com/use/elixir/" + elixirPosition;
+    let url = "https://war-version-0.herokuapp.com/use/elixir/" + elixirPosition;
 
     fetch(url, {
         method:'PUT',
@@ -714,10 +715,11 @@ function checkIfElixirHasRunOut(data){
 
     console.log("CHECKING IF ELIXIR HAS RUN OUT");
 
-    let url = "https://intense-peak-18063.herokuapp.com/check/elixir/";
+    let url = "https://war-version-0.herokuapp.com/check/elixir/";
 
     fetch(url, {
-        method:'PUT',
+        method: 'PUT',
+        mode: 'no-cors',
         body: JSON.stringify(data),
         headers:{
             'Content-Type': 'application/json'
