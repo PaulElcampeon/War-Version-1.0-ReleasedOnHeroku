@@ -445,9 +445,11 @@ function checkIfOperationIsCompleteInitializer() {
 
     console.log("INITIALIZING CHECK IF OPERATION IS COMPLETE FUNC");
 
-    let data = {name: warriorData.name};
+//    let data = {name: warriorData.name};
+//
+//    checkIfOperationIsComplete(data);
+    checkIfOperationIsComplete();
 
-    checkIfOperationIsComplete(data);
 }
 
 
@@ -522,27 +524,29 @@ function displayActiveElixir() {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
-function checkIfOperationIsComplete(data) {
+function checkIfOperationIsComplete() {
 
     console.log("SENDING REQUEST TO CHECK IF ACTIVE OPERATION IS COMPLETE");
 
-    let url = "https://war-version-0.herokuapp.com/operationComplete/" + warriorData.name;
+    if (data != undefined) {
+        let url = "https://war-version-0.herokuapp.com/operationComplete/" + warriorData.name;
 
-    fetch(url, {
-        method:'POST',
-        mode: 'no-cors',
-        body: JSON.stringify(data),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then(data => {
-            console.log("DATA FROM CHECKING IF ACTIVE OPERATION IS COMPLETE REQUEST");
-            console.log(data);
-            directResponse(data);
+        fetch(url, {
+            method:'POST',
+            mode: 'no-cors',
+            //body: JSON.stringify(data),
+            headers:{
+                'Content-Type': 'application/json'
+            }
         })
+            .then(res => res.json())
+            .catch(error => console.error('Error:', error))
+            .then(data => {
+                console.log("DATA FROM CHECKING IF ACTIVE OPERATION IS COMPLETE REQUEST");
+                console.log(data);
+                directResponse(data);
+            })
+    }
 }
 
 
