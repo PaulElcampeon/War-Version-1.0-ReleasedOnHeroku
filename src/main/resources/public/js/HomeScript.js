@@ -102,7 +102,7 @@ document.getElementById("login").addEventListener("click",() => {
 
 document.getElementById("createAccount").addEventListener("click",() => {
     console.log("you clicked me")
-    location.href = '/templates/CreateAccountTemplate.html';
+    location.href = './CreateAccountTemplate.html';
 
 });
 
