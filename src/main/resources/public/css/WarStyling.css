@@ -1,0 +1,262 @@
+body {
+    height: 100%;
+	width: 100%;
+    margin: 0;
+    font-family: Arial,Helvetica,Sans-serif;
+    background-color: #000000;
+    /*background-image: url("../media/homebg.jpg");*/
+    /*background-position: center;*/
+    /*background-position: 10% 30%;*/
+
+}
+
+.bodyDiv{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: #fff;
+    /*float:left;*/
+
+}
+
+.title{
+    font-size: 2em;
+    margin-top: 5%;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+}
+
+button{
+    background: #000000;
+    color: #fff;
+}
+
+button:hover{
+    background: #fff;
+    color: #333333;
+}
+
+
+/*FOR HOME ONLY*/
+
+#loginDiv, input, button{
+    font-size: 1.1em;
+    margin: 15px;
+    padding: 15px;
+    text-align: center;
+}
+
+#passwordIncorrectWarning{
+    padding: 5px;
+    border: 2px solid red;
+    color: red;
+}
+
+
+
+
+/*FOR USER ACCOUNT TEMPLATE ONLY*/
+/*
+.divlad{
+    display:flex;
+    flex-direction:row;
+}
+*/
+
+
+#imageHolder{
+    border-radius: 50%;
+    /*border: 5px solid #7CFC00;*/
+    width: 300px;
+    height: 250px;
+}
+
+#healthPointsDiv{
+    margin: auto;
+    width: 200px;
+    height: 20px;
+    border: 2px solid #fff;
+    background-color: #4f8266;
+}
+
+#healthPointsBar{
+    height: 100%;
+    background-color: #42f471;
+}
+
+#experienceDiv{
+    margin: auto;
+    width: 200px;
+    height: 20px;
+    border: 2px solid #fff;
+    background-color: #4f8266;
+}
+
+#experienceBar{
+    height: 100%;
+    background-color: #42f471;
+}
+
+.bagRows {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.bagRows > div{
+    flex: 1;
+    padding: 5px;
+    margin: 5px;
+    border: 2px solid #fff;
+}
+
+.bagRows > div > img{
+    width: 80px;
+    height: 80px;
+}
+
+.bagRows > div > p{
+    padding: 0px;
+    margin: 0px;
+}
+
+.bagRows > div > button{
+    padding: 0px;
+    margin: 0px;
+}
+
+
+.equippedItems > div > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.equippedItems > div > div > div {
+    flex: 1;
+    padding: 10px;
+    margin: 5px;
+    border: 2px solid #fff;
+}
+
+.equippedItems > div > div > div > img{
+    width: 80px;
+    height: 80px;
+}
+
+/*FOR FIGHT PAGE ONLY*/
+
+#fightBodyDiv {
+   color: #fff;
+   display:flex;
+   /*flex-direction: column;*/
+   flex-direction: row;
+   text-align: center;
+}
+
+.fightersDiv > div > div > img{
+    border-radius: 50%;
+    width: 300px;
+    height: 250px;
+}
+
+.healthAndExperience > div{
+    margin: auto;
+    width: 200px;
+    height: 20px;
+    border: 2px solid #fff;
+    background-color: #4f8266;
+}
+
+.healthAndExperience > div > div{
+    height: 100%;
+    background-color: #42f471;
+}
+
+#progressBarDivOuter{
+    width: 100px;
+    background-color: #42f471;
+    margin: auto;
+
+}
+
+#progressBarDiv{
+    background-color: #4f8266;
+
+}
+/*FOR SHOP ONLY*/
+
+
+#bagItems > div{
+    border: 2px solid #fff;
+}
+
+
+#bagItems > div > img{
+    width: 80px;
+    height: 80px;
+}
+
+
+
+/*LEADER BOARD PAGE ONLY*/
+
+
+#leaderBoardDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+
+#leaderBoardDiv > div {
+    border: 2px solid #fff;
+}
+
+
+#leaderBoardDiv > div > img {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+
+/*DROP DOWN BUTTON ON LEADERBOARD*/
+
+/*.dropbtn {*/
+    /*background-color: #3498DB;*/
+    /*color: white;*/
+    /*padding: 16px;*/
+    /*font-size: 16px;*/
+    /*border: none;*/
+    /*cursor: pointer;*/
+/*}*/
+
+/*.dropbtn:hover, .dropbtn:focus {*/
+    /*background-color: #2980B9;*/
+/*}*/
+
+/*.dropdown {*/
+    /*position: relative;*/
+    /*display: inline-block;*/
+/*}*/
+
+/*.dropdown-content {*/
+    /*display: none;*/
+    /*position: absolute;*/
+    /*background-color: #f1f1f1;*/
+    /*min-width: 160px;*/
+    /*overflow: auto;*/
+    /*box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);*/
+    /*z-index: 1;*/
+/*}*/
+
+/*.dropdown-content a {*/
+    /*color: black;*/
+    /*padding: 12px 16px;*/
+    /*text-decoration: none;*/
+    /*display: block;*/
+/*}*/
+
+/*.dropdown a:hover {background-color: #ddd;}*/
+
+/*.show {display: block;}*/
