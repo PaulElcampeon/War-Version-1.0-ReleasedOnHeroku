@@ -38,7 +38,7 @@ public class Warrior {
     private int bonusDefense = 0;
     private double chanceToHit = 0.75;
     private int victories = 0;
-    private Long lastActive;
+    private String lastActive;
     @JsonProperty
     private boolean hasConsumedElixir = false;
     @JsonProperty

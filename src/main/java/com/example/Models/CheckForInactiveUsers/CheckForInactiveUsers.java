@@ -14,7 +14,7 @@ public class CheckForInactiveUsers {
         if (warriorList.size() != 0) {
             for (Warrior warrior : warriorList) {
                 if (warrior.isOnline()) {
-                    if (new Date().getTime() - warrior.getLastActive() >= 900000) { //been inACTIVE FOR MORE THAN 15 MINUTES
+                    if (new Date().getTime() - Long.parseLong(warrior.getLastActive()) >= 900000) { //been inACTIVE FOR MORE THAN 15 MINUTES
                         warrior.setOnline(false);
                         System.out.println(warrior.getName() + "HAS JUST BEEN SET OFFLINE");
                         new WarriorDaoServiceImplementation().updateObject(warrior.getName(), warrior);
