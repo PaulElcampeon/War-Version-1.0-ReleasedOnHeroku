@@ -44,7 +44,7 @@ function confirmUserCredentials(data) {
 
     console.log("CONFIRMING CREDENTIALS");
 
-    let url = 'https://war-version-1-point-0-proto.herokuapp.com/login';
+    let url = 'https://intense-peak-18063.herokuapp.com/login';
 
     fetch(url, {
         method: 'POST',
@@ -66,7 +66,7 @@ function saveUserDetails(data){
 
     console.log("SAVING USERS DATA");
 
-    let url = 'https://war-version-1-point-0-proto.herokuapp.com/api/update/warrior';
+    let url = 'https://intense-peak-18063.herokuapp.com/api/update/warrior';
 
     fetch(url, {
         method:'PUT',
@@ -101,8 +101,8 @@ document.getElementById("login").addEventListener("click",() => {
 
 
 document.getElementById("createAccount").addEventListener("click",() => {
-
-    location.href = './CreateAccountTemplate.html';
+    console.log("you clicked me")
+    location.href = '/templates/CreateAccountTemplate.html';
 
 });
 
