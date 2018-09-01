@@ -8,23 +8,23 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-@SpringBootApplication
 
+@SpringBootApplication
 public class Main {
 
     public static void main(String args[]) throws IOException {
         SpringApplication.run(Main.class,args);
 
-//        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-//        Runnable periodicTask = new Runnable() {
-//            public void run() {
-//                // Invoke method(s) to do the work
-//                CheckForInactiveUsers.setToOffLineInActiveUsers();
-//                Thread.currentThread().getName();
-//            }
-//        };
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        Runnable periodicTask = new Runnable() {
+            public void run() {
+                // Invoke method(s) to do the work
+                CheckForInactiveUsers.setToOffLineInActiveUsers();
+                Thread.currentThread().getName();
+            }
+        };
 
-//        executor.scheduleAtFixedRate(periodicTask, 0, 600, TimeUnit.SECONDS);//every 10 minutes
+        executor.scheduleAtFixedRate(periodicTask, 0, 600, TimeUnit.SECONDS);//every 10 minutes
 
     }
 

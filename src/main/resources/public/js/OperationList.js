@@ -56,7 +56,7 @@ function logout(){
 ///////////////////////////////////////////////////////////////////////////////////////
 
 function getOperationList(){
-    let url = "https://war-version-1-point-0-proto.herokuapp.com/api/get/operation/random/"+warriorData.level;
+    let url = "https://intense-peak-18063.herokuapp.com/api/get/operation/random/"+warriorData.level;
     fetch(url, {
             method:'GET'
         })
@@ -69,7 +69,7 @@ function getOperationList(){
 }
 
 function saveUserDetails(data){
-    let url = 'https://war-version-1-point-0-proto.herokuapp.com/api/update/warrior';
+    let url = 'https://intense-peak-18063.herokuapp.com/api/update/warrior';
     fetch(url, {
                 method:'PUT',
                 body: JSON.stringify(data),
