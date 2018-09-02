@@ -91,7 +91,7 @@ public class WarriorController {
         res.getWriter().write(jsonStringOfWarriorList);
     }
 
-    @RequestMapping(value="/api/warrior/battlereceipt/you}", method=RequestMethod.GET)
+    @RequestMapping(value="/api/warrior/battlereceipt/{you}", method=RequestMethod.GET)
     public void getBattleReceipts(HttpServletRequest req, HttpServletResponse res) throws IOException {
         LocationPrinter.printLocation("GET ALL WARRIOR EXCEPT");
         servletPath = req.getServletPath().split("/");
