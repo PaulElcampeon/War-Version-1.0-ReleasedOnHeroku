@@ -1,28 +1,18 @@
-var music, isMusicPlaying, data, passwordIncorrectWarning;
+var music, isMusicPlaying, data, passwordIncorrectWarning, username1, password1;
 
 isMusicPlaying = false;
 music = document.getElementById("audio1");
 passwordIncorrectWarning = document.getElementById("passwordIncorrectWarning");
 passwordIncorrectWarning.style.display = "none";
+username1 = document.getElementById("user");
+password1 = document.getElementById("pass");
 
 
 function formingUserData(){
 
     console.log("FORMING USER DATA");
 
-    let username1 = document.getElementById("user").value;
-    let password1 = document.getElementById("pass").value;
-
-    if (username1 == "" || password1 == "") {
-
-        passwordIncorrectWarning.innerHTML = "ENTER A USERNAME AND PASSWORD";
-        return passwordIncorrectWarning.style.display = "inline";
-
-    } else {
-
-        data = {username: username1, password: password1};
-
-    }
+    data = {username: username1.value, password: password1.value};
 
 }
 
@@ -105,13 +95,23 @@ function saveUserDetails(data){
 
 document.getElementById("login").addEventListener("click",() => {
 
-    formingUserData();
-    confirmUserCredentials(data);
+    if (username1.value == "" || password1.value == "") {
+
+         passwordIncorrectWarning.innerHTML = "ENTER A USERNAME AND PASSWORD";
+         return passwordIncorrectWarning.style.display = "inline";
+
+    } else {
+
+        formingUserData();
+        confirmUserCredentials(data);
+
+    }
 
 });
 
 
 document.getElementById("createAccount").addEventListener("click",() => {
+
     console.log("you clicked me")
     location.href = './CreateAccountTemplate.html';
 
