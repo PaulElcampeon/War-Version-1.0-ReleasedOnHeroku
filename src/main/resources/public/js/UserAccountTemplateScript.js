@@ -1068,11 +1068,11 @@ function hideBagWeaponArmourAttAndDefDivs() {
 
 function setEverythingToLocked() {
 
-    document.getElementById("shopBtn").style.border = "thick solid #ff0000";
-    document.getElementById("healWarrior").style.border = "thick solid #ff0000";
-    document.getElementById("operationListBtn").style.border = "thick solid #ff0000";
-    document.getElementById("getBagBtn").style.border = "thick solid #ff0000";
-    document.getElementById("warriorListExceptBtn").style.border = "thick solid #ff0000";
+    document.getElementById("shopBtn").style.border = "2px solid #ff0000";
+    document.getElementById("healWarrior").style.border = "2px solid #ff0000";
+    document.getElementById("operationListBtn").style.border = "2px solid #ff0000";
+    document.getElementById("getBagBtn").style.border = "2px solid #ff0000";
+    document.getElementById("warriorListExceptBtn").style.border = "2px solid #ff0000";
 
     document.getElementById("shopBtn").innerHTML = "SHOP<br>LOCKED";
     document.getElementById("healWarrior").innerHTML = "GET MEDICAL TREATMENT<br>LOCKED";
@@ -1083,11 +1083,11 @@ function setEverythingToLocked() {
 
 function setEverythingToUnlocked() {
 
-    document.getElementById("shopBtn").style.border = "thick solid #FFFFFF";
-    document.getElementById("healWarrior").style.border = "thick solid #FFFFFF";
-    document.getElementById("operationListBtn").style.border = "thick solid #FFFFFF";
-    document.getElementById("getBagBtn").style.border = "thick solid #FFFFFF";
-    document.getElementById("warriorListExceptBtn").style.border = "thick solid #FFFFFF";
+    document.getElementById("shopBtn").style.border = "2px solid #FFFFFF";
+    document.getElementById("healWarrior").style.border = "2px solid #FFFFFF";
+    document.getElementById("operationListBtn").style.border = "2px solid #FFFFFF";
+    document.getElementById("getBagBtn").style.border = "2px solid #FFFFFF";
+    document.getElementById("warriorListExceptBtn").style.border = "2px solid #FFFFFF";
 
     document.getElementById("shopBtn").innerHTML = "SHOP";
     document.getElementById("healWarrior").innerHTML = "GET MEDICAL TREATMENT";
