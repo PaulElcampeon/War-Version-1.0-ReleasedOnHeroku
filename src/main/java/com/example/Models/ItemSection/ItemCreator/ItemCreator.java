@@ -10,10 +10,13 @@ public class ItemCreator {
 
     //CHECKED
     //TESTED
-    private static double  probability = new Random().nextDouble();
+    private static double  probability;
 
 
     public static Object createPrize(ItemType typeOfItem, int missionLevel) {
+
+        probability = new Random().nextDouble();
+
         if (typeOfItem == ItemType.WEAPON) {
             return WeaponCreator.createWeapon(missionLevel, probability);
         }

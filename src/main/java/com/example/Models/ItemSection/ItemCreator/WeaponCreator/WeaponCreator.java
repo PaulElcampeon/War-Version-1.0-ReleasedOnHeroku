@@ -1,14 +1,13 @@
 package com.example.Models.ItemSection.ItemCreator.WeaponCreator;
 
 import com.example.Models.ItemSection.Weapon.Weapon;
-
 import java.util.Random;
 
 public class WeaponCreator {
 
     //CHECKED
     //TESTED
-    private static Random rand = new Random();
+    private static Random rand;
     private static int bottomRangeDamage;
     private static int topRangeDamage;
     private static String imageUrl;
@@ -16,6 +15,8 @@ public class WeaponCreator {
 
 
     public static Weapon createWeapon(int missionLevel, double probability){
+
+        rand = new Random();
 
         if(probability <= 0.75) {//have a 75% chance to get a normal weapon
             //normal weapon

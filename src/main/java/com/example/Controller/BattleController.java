@@ -35,18 +35,18 @@ public class BattleController {
     @RequestMapping(value="/battle/fight", method=RequestMethod.POST)
     public void fight(@RequestBody HashMap<String,String> namesOfFighters, HttpServletRequest req, HttpServletResponse res) throws IOException {
         LocationPrinter.printLocation("BATTLE");
-        System.out.println("NAME OF FIGHTERS: "+namesOfFighters);
+        System.out.println("NAME OF FIGHTERS: " + namesOfFighters);
         this.getFightersAsObjects(namesOfFighters);
         battleServiceImplementation.startBattleAll(aggressor, defender);
         this.updateVictorsLevelAndTitle(battleServiceImplementation);
         this.battleResultsCommentry(battleServiceImplementation);
-        this.updateFightersInDB();
+//        this.updateFightersInDB();
         HashMap<String, Object> battleDetails = new HashMap<>();
-        battleDetails.put("warrior",aggressor);
-        battleDetails.put("AttackersDamagePattern",battleServiceImplementation.getAttacksDamagePattern());
-        battleDetails.put("DefendersDamagePattern",battleServiceImplementation.getDefendersDamagePattern());
-        System.out.println("Attacks Damage Pattern: "+battleServiceImplementation.getAttacksDamagePattern());
-        System.out.println("Defenders Damage Pattern: "+battleServiceImplementation.getDefendersDamagePattern());
+        battleDetails.put("warrior", aggressor);
+        battleDetails.put("AttackersDamagePattern", battleServiceImplementation.getAttacksDamagePattern());
+        battleDetails.put("DefendersDamagePattern", battleServiceImplementation.getDefendersDamagePattern());
+        System.out.println("Attacks Damage Pattern: " + battleServiceImplementation.getAttacksDamagePattern());
+        System.out.println("Defenders Damage Pattern: " + battleServiceImplementation.getDefendersDamagePattern());
         String battleDetailsJSON = gson.toJson(battleDetails);
         InitializeResponse.initialize(res);
         //Making sure to empty the array

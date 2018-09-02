@@ -28,4 +28,10 @@ public class Main {
 
     }
 
+    //elxir and weapons and armour creation were not random were not random
+    //messaging service
+    //combine armour
+    //combine weapon
+    //combine elixir
+
 }

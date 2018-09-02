@@ -3,16 +3,15 @@ package com.example.Models.BattleSection.Battle;
 
 import com.example.Models.BattleSection.BattleReceipt.BattleReceipt;
 import com.example.Models.Warrior.Warrior;
-import lombok.Getter;
-import lombok.Setter;
+import com.example.Services.DaoServices.WarriorDaoServiceImplementation;
+import lombok.Data;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
 
-@Getter
-@Setter
+@Data
 public class Battle {
 
     //CHECKED
@@ -162,12 +161,20 @@ public class Battle {
     }
 
 
+    public void updateBothPlayersInDB() {
+        WarriorDaoServiceImplementation warriorDaoServiceImplementation = new WarriorDaoServiceImplementation();
+        warriorDaoServiceImplementation.updateObject(this.attacker.getName(), this.attacker);
+        warriorDaoServiceImplementation.updateObject(this.defender.getName(), this.defender);
+    }
+
+
     public void startBattleAll(Warrior attacker, Warrior defender) {
         this.battlePrep(attacker,defender);
         this.startBattle();
         this.setVictorAndLoser();
         this.createBattleReceipt();
         this.giveBattleReceiptsToBothPlayers();
+        this.updateBothPlayersInDB();
     }
 
 

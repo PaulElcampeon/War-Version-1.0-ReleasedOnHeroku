@@ -12,19 +12,25 @@ public class ElixirCreator {
     //CHECKED
     //TESTED
     private static Random rand = new Random();
-    private static ElixirType[] elixirTypes = ElixirType.values();
-    private static ElixirType elixirType = elixirTypes[rand.nextInt(2)];
+    private static ElixirType[] elixirTypes;
+    private static ElixirType elixirType;
     private static String imageUrl;
-    private static DurationType[] durationTypes = DurationType.values(); //10 minutes
-    private static DurationType durationType = durationTypes[rand.nextInt(durationTypes.length)];
-    private static int level = (new Random().nextInt(3)) + 1;
+    private static DurationType[] durationTypes; //10 minutes
+    private static DurationType durationType;
+    private static int level;
     private static Elixir elixir;
-    private static double probability = new Random().nextDouble();
+    private static double probability;
 
 
     public static Elixir createElixir() {
 
+        elixirTypes = ElixirType.values();
+        elixirType = elixirTypes[rand.nextInt(2)];
+        durationTypes = DurationType.values();
+        durationType = durationTypes[rand.nextInt(durationTypes.length)];
+        level = (new Random().nextInt(3)) + 1;
         imageUrl = ElixirImages.getImage(elixirType);
+        probability = new Random().nextDouble();
         setElixirAmount(probability);
 
         if(elixirType == ElixirType.HEALTH) {

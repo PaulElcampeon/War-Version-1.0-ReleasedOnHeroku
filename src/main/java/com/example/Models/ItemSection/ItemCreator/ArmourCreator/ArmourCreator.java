@@ -3,23 +3,24 @@ package com.example.Models.ItemSection.ItemCreator.ArmourCreator;
 import com.example.EnumTypes.ArmourType;
 import com.example.Models.ItemSection.Armour.Armour;
 import com.example.Models.ItemSection.ItemCreator.ItemImages.ArmourImages;
-
 import java.util.Random;
 
 public class ArmourCreator {
 
     //CHECKED
     //TESTED
-    private static Random rand = new Random();
-    private static ArmourType[] bodyPartsName = ArmourType.values();
-    private static ArmourType bodyPart = bodyPartsName[rand.nextInt(2)];
+    private static Random rand;
+    private static ArmourType[] bodyPartsName;
+    private static ArmourType bodyPart;
     private static String imageUrl;
     private static int defenseLevel;
     private static Armour armour;
 
     public static Armour createArmour (int missionLevel, double probability) {
-
+        rand = new Random();
+        bodyPartsName = ArmourType.values();
         imageUrl = ArmourImages.getImage(bodyPart);
+        bodyPart = bodyPartsName[rand.nextInt(2)];
 
         if (probability <= 0.7) {//have a 70% chance to get a normal armour
             //normal armour
