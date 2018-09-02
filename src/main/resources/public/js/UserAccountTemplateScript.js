@@ -721,11 +721,10 @@ function checkIfElixirHasRunOut(data){
 
     fetch(url, {
         method: 'POST',
-        mode: 'no-cors',
+        mode: 'cors',
         body: JSON.stringify(data),
         headers:{
-            "Content-Type": "application/json; charset=utf-8",
-//            "Content-Type" : "text/plain"
+            "Content-Type": "application/json"
         }
     })
         .then(res => res.json())
@@ -735,8 +734,9 @@ function checkIfElixirHasRunOut(data){
             console.log(data);
             checkIfElixirIsOut(data);
             setWarriorData(data);
-            setSessionStorage(JSON.stringify(data));
             populateUserInfoDiv(warriorData);
+            setSessionStorage(JSON.stringify(data));
+
         })
 }
 
