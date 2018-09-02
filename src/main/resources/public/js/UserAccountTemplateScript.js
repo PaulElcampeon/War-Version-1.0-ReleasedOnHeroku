@@ -358,7 +358,7 @@ function logout() {
     console.log("LOGGING OUT");
 
 //    warriorData.isOnline = false;
-    logOutWarrior();
+    logOutWarrior(warriorData);
     sessionStorage.removeItem("warriorData");
 
     try {
@@ -626,7 +626,7 @@ function logOutWarrior() {
 
     fetch(url, {
         method:'PUT',
-//        body: JSON.stringify(data),
+        body: JSON.stringify(data),
         headers:{
             'Content-Type': 'application/json'
         }

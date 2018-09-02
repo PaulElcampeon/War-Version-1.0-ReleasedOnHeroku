@@ -37,6 +37,20 @@ public class Main {
 
 
 //        WarriorDaoServiceImplementation warriorDaoServiceImplementation = new WarriorDaoServiceImplementation();
+//        Warrior warrior = (Warrior) warriorDaoServiceImplementation.getObject("Dave");
+//        System.out.println(warrior.isOnline());
+//
+//        warrior.setOnline(true);
+//
+//        System.out.println(warrior.isOnline());
+//
+//        warriorDaoServiceImplementation.logout("Dave");
+//
+//        Warrior warrior1 = (Warrior) warriorDaoServiceImplementation.getObject("Dave");
+//
+//
+//        System.out.println(warrior1.isOnline());
+
 //        ExperienceServiceImplementation experienceServiceImplementation = new ExperienceServiceImplementation();
 //        LevelingServiceImplementation levelingServiceImplementation = new LevelingServiceImplementation();
 //        BattleServiceImplementation battleServiceImplementation = new BattleServiceImplementation();
