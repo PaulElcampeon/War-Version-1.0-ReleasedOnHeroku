@@ -72,40 +72,10 @@ function decreaseUpperLimitBy10() {
 }
 
 
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-
-    document.getElementById("myDropdown").classList.toggle("show");
-
-}
-
-
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-
-    if (!event.target.matches('.dropbtn')) {
-
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
-
-        for (i = 0; i < dropdowns.length; i++) {
-
-            var openDropdown = dropdowns[i];
-
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-            }
-        }
-    }
-};
-
-
 function logout() {
 
      console.log("LOGGING OUT");
-     warriorData.isOnline = false;
-     saveUserDetails(warriorData);
+     logOutWarrior(warriorData);
      sessionStorage.removeItem("warriorData");
 
      try {
@@ -124,6 +94,27 @@ function logout() {
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////REQUESTS////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+function logOutWarrior(data) {
+
+    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior/' + warriorData.name;
+
+    fetch(url, {
+        method:'PUT',
+        body: JSON.stringify(data),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then((data) => {
+
+        })
+}
+
 
 
 function getWarriorsList() {
@@ -155,77 +146,7 @@ function getWarriorsList() {
 }
 
 
-function saveUserDetails(data) {
 
-    let url = 'https://intense-peak-18063.herokuapp.com/api/update/warrior';
-
-    fetch(url, {
-        method:'PUT',
-        body: JSON.stringify(data),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            console.log(data)
-        })
-}
-
-// function getWarriorListBasedOnLevel() {
-//     console.log("GETTING WARRIOR LIST BASED ON LEVEL");
-//
-//     let url = 'http://localhost:8080/api/getAll/warrior/level';
-//
-//     fetch(url, {
-//         method:'GET'
-//     })
-//         .then(res => res.json())
-//         .catch(error => console.error('Error:', error))
-//         .then((data) => {
-//             console.log("DATA FROM WARRIOR LIST BASED ON LEVEL REQUEST");
-//             console.log(data);
-//
-//             if (data.message == "failure") {
-//
-//                 decreaseUpperLimitBy10();
-//
-//             } else {
-//
-//                 console.log(data.warriorListData);
-//                 displayWarriorList(data.warriorListData);
-//
-//             }
-//         })
-// }
-//
-// function getWarriorListBasedOnVictories() {
-//     console.log("GETTING WARRIOR LIST BASED ON VICTORIES");
-//
-//     let url = 'http://localhost:8080/api/getAll/warrior/victories';
-//
-//     fetch(url, {
-//         method:'GET'
-//     })
-//         .then(res => res.json())
-//         .catch(error => console.error('Error:', error))
-//         .then((data) => {
-//             console.log("DATA FROM WARRIOR LIST BASED ON VICTORIES REQUEST");
-//             console.log(data);
-//
-//             if (data.message == "failure") {
-//
-//                 decreaseUpperLimitBy10();
-//
-//             } else {
-//
-//                 console.log(data.warriorListData);
-//                 displayWarriorList(data.warriorListData);
-//
-//             }
-//         })
-// }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////BUTTON EVENT LISTENERS//////////////////////////////////////
@@ -266,16 +187,6 @@ document.getElementById("backToUserProfileBtn").addEventListener("click",() => {
 
  });
 
-
-// document.getElementById("sortByLevel").addEventListener("click", () => {
-//
-//     getWarriorsLisBasedOnLevel();
-// });
-//
-//
-// document.getElementById("sortByVictories").addEventListener("click", () => {
-//
-// });
 
 
  ////////////////////////////////////////////////////////////////////////////////////////

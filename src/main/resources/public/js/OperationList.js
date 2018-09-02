@@ -36,20 +36,23 @@ function next10(){
  }
 
 
-function logout(){
+function logout() {
+
     console.log("LOGGING OUT");
-    warriorData.isOnline = false;
-    saveUserDetails(warriorData)
+
+    logOutWarrior(warriorData);
     sessionStorage.removeItem("warriorData");
+
     try {
-         sessionStorage.removeItem("otherUser");
-    }
-    catch(err) {
+        sessionStorage.removeItem("otherUser");
+    } catch(err) {
         alert("NO OTHER USER DATA")
     }
 
-    location.href = './index.html'
- }
+    location.href = './index.html';
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////REQUESTS///////////////////////////////////////////
@@ -68,20 +71,25 @@ function getOperationList(){
             })
 }
 
-function saveUserDetails(data){
-    let url = 'https://war-version-0.herokuapp.com/api/update/warrior';
+
+function logOutWarrior(data) {
+
+    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior/' + warriorData.name;
+
     fetch(url, {
-                method:'PUT',
-                body: JSON.stringify(data),
-                headers:{
-                    'Content-Type': 'application/json'
-                    }
-                })
-                .then(res => res.json())
-                .catch(error => console.error('Error:', error))
-                .then((data) => {
-                 })
+        method:'PUT',
+        body: JSON.stringify(data),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then((data) => {
+
+        })
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////FUNCTION TO CHECK SESSION STORAGE HAS USER INFO//////////////////////

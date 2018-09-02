@@ -1,7 +1,7 @@
 var attackersName, defendersName, attackersHPHolder, defendersHPHolder, attackersHP, defendersHP,
     attackersDamageP, defendersDamageP, engageBtnDiv, backToUserProfileDiv, healthPointsBarSize,
     multiplierForWarriorA, multiplierForWarriorD, vsDiv, attackersTurn, defendersTurn, defendersData,
-    attackersData, indexOfDamagePatternA, indexOfDamagePatternD;
+    attackersData, indexOfDamagePatternA, indexOfDamagePatternD, warriorData;
 
 indexOfDamagePatternA = 0;
 indexOfDamagePatternD = 0;
@@ -30,7 +30,7 @@ if (document.readyState !== 'loading') {
 
 
 function ready () {
-
+    warriorData = JSON.parse(sessionStorage.getItem("warriorData"))
     let fightersDetails = JSON.parse(sessionStorage.getItem("fighters"));
     attackersName = fightersDetails.attacker;
     defendersName = fightersDetails.defender;
@@ -236,6 +236,23 @@ function fightInitializer(aggressor, defender) {
 
 }
 
+function logout() {
+
+    console.log("LOGGING OUT");
+
+    logOutWarrior(warriorData);
+    sessionStorage.removeItem("warriorData");
+
+    try {
+        sessionStorage.removeItem("otherUser");
+    } catch(err) {
+        alert("NO OTHER USER DATA")
+    }
+
+    location.href = './index.html';
+}
+
+
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////REQUESTS///////////////////////////////////////////
@@ -296,7 +313,9 @@ function fight(data) {
         .then(res => res.json())
         .catch(error => console.error('Error:', error))
         .then((data) => {
+
             sessionStorage.setItem("warriorData", JSON.stringify(data.warrior));
+            warriorData = data.warrior;
             console.log("DATA FROM FIGHT REQUEST");
             console.log(data.warrior);//aggressor
             console.log("Attackers Damage Pattern");
@@ -308,6 +327,27 @@ function fight(data) {
             myInterval = setInterval(simulateFightPreparation, 2000);
          })
 }
+
+
+
+function logOutWarrior(data) {
+
+    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior/' + warriorData.name;
+
+    fetch(url, {
+        method:'PUT',
+        body: JSON.stringify(data),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then((data) => {
+
+        })
+}
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////////

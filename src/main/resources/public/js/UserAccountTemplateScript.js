@@ -459,7 +459,6 @@ function directResponse(data) {
 
         if (data.success == true) {
             document.getElementById("previousOperationResults").innerHTML = "You have completed your last quest and were successful check your bag for a reward"
-            // confirm("You have completed your operation and were successful");
         }
 
         if (data.success == false) {
@@ -467,10 +466,6 @@ function directResponse(data) {
         }
 
         warriorData = data.avatar;
-//        warriorData.operationList[0].isActive = false;
-//        console.log("WE HAVE SET THE OPERATION isActive TO FALSE");
-//        warriorData.isOnOperation = false;
-//        console.log("WE HAVE SET THE isOnOperation TO FALSE");
 
         activeOperationsDiv.innerHTML = "";
         activeOperationTitle.style.display = "block";
@@ -487,14 +482,6 @@ function directResponse(data) {
         setWarriorData(warriorData);
         populateUserInfoDiv(warriorData);
         populateActiveOperationsDiv(warriorData);
-
-//        saveUserDetails(warriorData);
-
-//        setWarriorData(warriorData);
-//        populateUserInfoDiv(warriorData);
-//        populateActiveOperationsDiv(warriorOperation);
-////        saveUserDetails(warriorData);
-//        displayBag();
     }
 }
 
@@ -593,29 +580,6 @@ function getWarriorsListExcept(name) {
                 console.log(data);
                 displayWarriorList(data)
             }
-        })
-}
-
-function saveUserDetails(data) {
-
-    let url = 'https://war-version-0.herokuapp.com/api/update/warrior';
-
-    fetch(url, {
-        method:'PUT',
-        body: JSON.stringify(data),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            console.log(data);
-            console.log(warriorData);
-            setSessionStorage(JSON.stringify(data));
-            setWarriorData(data);
-            populateUserInfoDiv(data);
-            populateActiveOperationsDiv(data);
         })
 }
 

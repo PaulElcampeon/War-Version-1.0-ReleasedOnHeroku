@@ -49,7 +49,7 @@ function populateWithMyItems() {
             warriorData.bag.weaponBag.splice(i, 1);
             console.log(warriorData);
 //            populateWithMyItems();
-            saveUserDetails(warriorData);
+            updateBagAndMoney(warriorData);
          });
 
          div.appendChild(nameAndPrice);
@@ -77,7 +77,7 @@ function populateWithMyItems() {
                 warriorData.bag.armourBag.splice(i, 1);
                 console.log(warriorData);
 //                populateWithMyItems();
-                saveUserDetails(warriorData);
+                updateBagAndMoney(warriorData);
              });
 
         div.appendChild(nameAndPrice);
@@ -106,7 +106,7 @@ function populateWithMyItems() {
             warriorData.bag.elixirBag.splice(i, 1);
             console.log(warriorData);
 //           populateWithMyItems();
-            saveUserDetails(warriorData);
+            updateBagAndMoney(warriorData);
         });
 
         div.appendChild(nameAndPrice);
@@ -122,18 +122,14 @@ function populateWithMyItems() {
 function logout() {
 
     console.log("LOGGING OUT");
-    warriorData.isOnline = false;
-    saveUserDetails(warriorData);
+
+    logOutWarrior(warriorData);
     sessionStorage.removeItem("warriorData");
 
     try {
-
         sessionStorage.removeItem("otherUser");
-
     } catch(err) {
-
-        alert("NO OTHER USER DATA");
-
+        alert("NO OTHER USER DATA")
     }
 
     location.href = './index.html';
@@ -144,10 +140,33 @@ function logout() {
 ///////////////////////////////////REQUESTS///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 
+function logOutWarrior(data) {
 
-function saveUserDetails(data) {
+    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior/' + warriorData.name;
 
-    let url = 'https://war-version-0.herokuapp.com/api/update/warrior';
+    fetch(url, {
+        method:'PUT',
+        body: JSON.stringify(data),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then((data) => {
+
+        })
+}
+
+
+setWarriorData(data);
+            setSessionStorage(data);
+            populateWithMyItems();
+
+
+function updateBagAndMoney(data) {
+
+    let url = 'https://war-version-0.herokuapp.com/api/update/warrior/bag/money';
 
     fetch(url, {
         method:'PUT',

@@ -47,7 +47,6 @@ public class WarriorController {
         warriorDaoServiceImplementation.updateObject(warrior.getName(), warrior);
         InitializeResponse.initialize(res);
         res.getWriter().write(ObjectAsString);
-
     }
 
     @RequestMapping(value="/api/get/warrior/{id}", method=RequestMethod.GET)
@@ -157,5 +156,17 @@ public class WarriorController {
         String jsonStringOfWarriorList = gson.toJson(warrior);
         InitializeResponse.initialize(res);
         res.getWriter().write(jsonStringOfWarriorList);
+    }
+
+    @RequestMapping(value="api/update/warrior/bag/money", method=RequestMethod.PUT)
+    public void updateWarriorBagAndMoney(@RequestBody Warrior warrior, HttpServletRequest req, HttpServletResponse res) throws IOException {
+        LocationPrinter.printLocation("UPDATE WARRIOR BAG MONEY");
+        Warrior warriorInDB = (Warrior) warriorDaoServiceImplementation.getObject(warrior.getName());
+        warriorInDB.setBag(warrior.getBag());
+        warriorInDB.setMoney(warrior.getMoney());
+        String ObjectAsString = gson.toJson(warriorInDB);
+        warriorDaoServiceImplementation.updateObject(warriorInDB.getName(), warriorInDB);
+        InitializeResponse.initialize(res);
+        res.getWriter().write(ObjectAsString);
     }
 }

@@ -34,11 +34,10 @@ public class ItemServiceController {
         itemPositionInBag = Integer.parseInt(servletPath[3]);
         objectAsString = gson.toJson(object);
         userAvatar = gson.fromJson(objectAsString,Warrior.class);
-        itemServiceImplemented.equipArmour(userAvatar,userAvatar.getBag().getArmourBag().get(itemPositionInBag));
-        System.out.println("Is the object a warrior ");
-        System.out.println(userAvatar instanceof Warrior);
-        System.out.println("THE WARRIOR IS "+userAvatar+" THE ID IS "+userAvatar.getId());
-        userAvatar = (Warrior)warriorDaoServiceImplementation.updateObject(userAvatar.getName(), userAvatar);
+        Warrior warrior = (Warrior) warriorDaoServiceImplementation.getObject(userAvatar.getName());
+        itemServiceImplemented.equipArmour(warrior,warrior.getBag().getArmourBag().get(itemPositionInBag));
+        System.out.println("THE WARRIOR IS " + warrior + " THE ID IS " + warrior.getId());
+        userAvatar = (Warrior)warriorDaoServiceImplementation.updateObject(warrior.getName(), warrior);
         InitializeResponse.initialize(res);
         String userAvatarJSON = gson.toJson(userAvatar);
         res.getWriter().write(userAvatarJSON);
@@ -50,13 +49,12 @@ public class ItemServiceController {
         servletPath = req.getServletPath().split("/");
         itemPositionInBag = Integer.parseInt(servletPath[3]);
         objectAsString = gson.toJson(object);
-        userAvatar = gson.fromJson(objectAsString,Warrior.class);
-        itemServiceImplemented.equipWeapon(userAvatar,userAvatar.getBag().getWeaponBag().get(itemPositionInBag));
-        System.out.println("Is the object a warrior ");
-        System.out.println(userAvatar instanceof Warrior);
-        warriorDaoServiceImplementation.updateObject(userAvatar.getName(), userAvatar);
+        userAvatar = gson.fromJson(objectAsString, Warrior.class);
+        Warrior warrior = (Warrior) warriorDaoServiceImplementation.getObject(userAvatar.getName());
+        itemServiceImplemented.equipWeapon(warrior,warrior.getBag().getWeaponBag().get(itemPositionInBag));
+        warriorDaoServiceImplementation.updateObject(warrior.getName(), warrior);
         InitializeResponse.initialize(res);
-        String userAvatarJSON = gson.toJson(userAvatar);
+        String userAvatarJSON = gson.toJson(warrior);
         res.getWriter().write(userAvatarJSON);
     }
 
@@ -67,26 +65,27 @@ public class ItemServiceController {
         itemPositionInBag = Integer.parseInt(servletPath[3]);
         objectAsString = gson.toJson(object);
         userAvatar = gson.fromJson(objectAsString,Warrior.class);
-        ElixirConsummation.consume(userAvatar,userAvatar.getBag().getElixirBag().get(itemPositionInBag));
-        System.out.println("Is the object a warrior ");
-        System.out.println(userAvatar instanceof Warrior);
-        warriorDaoServiceImplementation.updateObject(userAvatar.getName(), userAvatar);
+        Warrior warrior = (Warrior) warriorDaoServiceImplementation.getObject(userAvatar.getName());
+        ElixirConsummation.consume(warrior,warrior.getBag().getElixirBag().get(itemPositionInBag));
+        warriorDaoServiceImplementation.updateObject(warrior.getName(), warrior);
         InitializeResponse.initialize(res);
-        String userAvatarJSON = gson.toJson(userAvatar);
-        res.getWriter().write(userAvatarJSON);
+        String warriorJSON = gson.toJson(warrior);
+        res.getWriter().write(warriorJSON);
     }
 
     @RequestMapping(value="check/elixir", method= RequestMethod.POST)
     public void checkIfElixirAffectHasRunOut(@RequestBody Warrior warrior, HttpServletRequest req, HttpServletResponse res) throws IOException {
         LocationPrinter.printLocation("CHECK IF ELIXIR HAS RUN OUT");
-        if (warrior.getElixirAmount() != 0) {
+        Warrior warrior1 = (Warrior) warriorDaoServiceImplementation.getObject(warrior.getName());
+
+        if (warrior1.getElixirAmount() != 0) {
             System.out.println("WARRIOR HAS ELIXIR AMOUNT");
-            CheckIfElixirHasRunOut.check(warrior);
+            CheckIfElixirHasRunOut.check(warrior1);
         }
 
-        warriorDaoServiceImplementation.updateObject(warrior.getName(), warrior);
+        warriorDaoServiceImplementation.updateObject(warrior1.getName(), warrior1);
         InitializeResponse.initialize(res);
-        String userAvatarJSON = gson.toJson(warrior);
+        String userAvatarJSON = gson.toJson(warrior1);
         System.out.println("WHAT WE ARE SENDING BACK FROM CHECK ELIXIR CONTROLLER " + userAvatarJSON);
         res.getWriter().write(userAvatarJSON);
     }

@@ -44,17 +44,16 @@ function logout() {
 
     console.log("LOGGING OUT");
 
-    warriorData.isOnline = false;
-    saveUserDetails(warriorData);
+    logOutWarrior(warriorData);
     sessionStorage.removeItem("warriorData");
 
     try {
-             sessionStorage.removeItem("otherUser");
-         }
-         catch(err) {
-             alert("NO OTHER USER DATA");
-         }
-    location.href = './index.html'
+        sessionStorage.removeItem("otherUser");
+    } catch(err) {
+        alert("NO OTHER USER DATA")
+    }
+
+    location.href = './index.html';
 }
 
 
@@ -99,9 +98,9 @@ function goOnOperation(data) {
 }
 
 
-function saveUserDetails(data) {
+function logOutWarrior(data) {
 
-    let url = 'https://war-version-0.herokuapp.com/api/update/warrior';
+    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior/' + warriorData.name;
 
     fetch(url, {
         method:'PUT',

@@ -35,41 +35,6 @@ public class Main {
         executor.scheduleAtFixedRate(periodicTask, 0, 600, TimeUnit.SECONDS);//every 10 minutes
 
 
-
-//        WarriorDaoServiceImplementation warriorDaoServiceImplementation = new WarriorDaoServiceImplementation();
-//        Warrior warrior = (Warrior) warriorDaoServiceImplementation.getObject("Dave");
-//        System.out.println(warrior.isOnline());
-//
-//        warrior.setOnline(true);
-//
-//        System.out.println(warrior.isOnline());
-//
-//        warriorDaoServiceImplementation.logout("Dave");
-//
-//        Warrior warrior1 = (Warrior) warriorDaoServiceImplementation.getObject("Dave");
-//
-//
-//        System.out.println(warrior1.isOnline());
-
-//        ExperienceServiceImplementation experienceServiceImplementation = new ExperienceServiceImplementation();
-//        LevelingServiceImplementation levelingServiceImplementation = new LevelingServiceImplementation();
-//        BattleServiceImplementation battleServiceImplementation = new BattleServiceImplementation();
-//        TitleServiceImplemented titleServiceImplemented = new TitleServiceImplemented();
-//
-//        Warrior attacker;
-//        Warrior defender;
-//        attacker = (Warrior) warriorDaoServiceImplementation.getObject("Dave");
-//        defender = (Warrior) warriorDaoServiceImplementation.getObject("Ed");
-//
-//        battleServiceImplementation.startBattleAll(attacker, defender);
-//
-//        System.out.println("VICTOR " + battleServiceImplementation.getVictor());
-//
-//
-//
-//        experienceServiceImplementation.setExperienceFromBattle(battleServiceImplementation.returnBattle());
-//        levelingServiceImplementation.levelUp(battleServiceImplementation.getVictor());
-//        titleServiceImplemented.issueTitle(battleServiceImplementation.getVictor());
     }
 
 

@@ -25,11 +25,12 @@ public class HospitalController {
         LocationPrinter.printLocation("HOSPITAL");
         String userAvatarAsString = gson.toJson(object);
         Warrior userAvatarAsWarriorObject = gson.fromJson(userAvatarAsString, Warrior.class);
-        Hospital.healWarrior(userAvatarAsWarriorObject);
+        Warrior warrior1 = (Warrior) warriorDaoServiceImplementation.getObject(userAvatarAsWarriorObject.getName());
+        Hospital.healWarrior(warrior1);
         System.out.println("JUST GOT HEALED IN HOSPITAL");
-        warriorDaoServiceImplementation.updateObject(userAvatarAsWarriorObject.getName(), userAvatarAsWarriorObject);
+        warriorDaoServiceImplementation.updateObject(warrior1.getName(), warrior1);
         System.out.println("SAVED DATA");
-        String jsonStringOfUserAvatar = gson.toJson(userAvatarAsWarriorObject);
+        String jsonStringOfUserAvatar = gson.toJson(warrior1);
         System.out.println(jsonStringOfUserAvatar);
         InitializeResponse.initialize(res);
         res.getWriter().write(jsonStringOfUserAvatar);

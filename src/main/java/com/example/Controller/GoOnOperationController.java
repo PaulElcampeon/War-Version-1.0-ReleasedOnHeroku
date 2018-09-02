@@ -73,9 +73,11 @@ public class GoOnOperationController {
             playerAvatar.getOperationList().get(0).setActive(false);
             if(playerAvatar.getOperationList().get(0).isSuccessful()){
                 OperationRewardIssuer.issueOperationRewards(playerAvatar);
+                playerAvatar.getOperationList().remove(0);
                 warriorDaoServiceImplementation.updateObject(playerAvatar.getName(), playerAvatar);
                 constructResponseMessage("completed",true, playerAvatar);
             }else{
+                playerAvatar.getOperationList().remove(0);
                 constructResponseMessage("completed",false, playerAvatar);
             }
             res.getWriter().write(messageResponseJSON);
