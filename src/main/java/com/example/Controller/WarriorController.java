@@ -91,6 +91,17 @@ public class WarriorController {
         res.getWriter().write(jsonStringOfWarriorList);
     }
 
+    @RequestMapping(value="/api/warrior/battlereceipt/you}", method=RequestMethod.GET)
+    public void getBattleReceipts(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        LocationPrinter.printLocation("GET ALL WARRIOR EXCEPT");
+        servletPath = req.getServletPath().split("/");
+        idOfOject = servletPath[4];
+        Warrior warrior = (Warrior) warriorDaoServiceImplementation.getObject(idOfOject);
+        String jsonStringOfWarriorList = gson.toJson(warrior);
+        InitializeResponse.initialize(res);
+        res.getWriter().write(jsonStringOfWarriorList);
+    }
+
     @RequestMapping(value="/api/getAll/warrior/{lowerLimit}", method=RequestMethod.GET)
     public void getWarriorsInBatchOf10s(HttpServletRequest req, HttpServletResponse res) throws IOException {
         LocationPrinter.printLocation("GET ALL WARRIOR IN BATCHES 10");

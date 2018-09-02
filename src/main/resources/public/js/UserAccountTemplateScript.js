@@ -730,6 +730,27 @@ function checkIfElixirHasRunOut(data){
         })
 }
 
+
+function getBattleHistory() {
+
+    console.log("GETTING WARRIOR LIST");
+
+    let url = 'https://war-version-0.herokuapp.com/api/warrior/battlereceipt/' + warriorData.name;
+
+    fetch(url, {
+        method:'GET'
+    })
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then((data) => {
+             console.log("DATA FROM WARRIOR BATTLERECEIPT REQUEST");
+             console.log(data);
+             setWarriorData(data)
+             displayBattleReceipts(data.battleReceipts);
+
+        })
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////SETTING WARRIOR DATA//////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -787,7 +808,7 @@ document.getElementById("getBattleHistoryBtn").addEventListener("click",() => {
 
     } else {
 
-        displayBattleReceipts(warriorBattleReceipts);
+        getBattleHistory();
 
     }
 });

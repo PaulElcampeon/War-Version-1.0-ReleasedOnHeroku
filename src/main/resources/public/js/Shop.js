@@ -159,11 +159,6 @@ function logOutWarrior(data) {
 }
 
 
-setWarriorData(data);
-            setSessionStorage(data);
-            populateWithMyItems();
-
-
 function updateBagAndMoney(data) {
 
     let url = 'https://war-version-0.herokuapp.com/api/update/warrior/bag/money';
