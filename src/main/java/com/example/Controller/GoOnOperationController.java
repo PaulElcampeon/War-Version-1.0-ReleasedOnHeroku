@@ -67,17 +67,20 @@ public class GoOnOperationController {
 
         String endTimeString = playerAvatar.getOperationList().get(0).getEndTime();
         Long endTimeLong = Long.parseLong(endTimeString);
-        if(new Date().getTime() > endTimeLong){
+        if (new Date().getTime() > endTimeLong){
+
             System.out.println("OPERATION COMPLETE");//need to sort this out here so that user doesnt get duplicate items
             playerAvatar.setOnOperation(false);
             playerAvatar.getOperationList().get(0).setActive(false);
-            if(playerAvatar.getOperationList().get(0).isSuccessful()){
+
+            if (playerAvatar.getOperationList().get(0).isSuccessful()){
                 OperationRewardIssuer.issueOperationRewards(playerAvatar);
                 playerAvatar.getOperationList().remove(0);
                 warriorDaoServiceImplementation.updateObject(playerAvatar.getName(), playerAvatar);
                 constructResponseMessage("completed",true, playerAvatar);
-            }else{
+            } else {
                 playerAvatar.getOperationList().remove(0);
+                warriorDaoServiceImplementation.updateObject(playerAvatar.getName(), playerAvatar);
                 constructResponseMessage("completed",false, playerAvatar);
             }
             res.getWriter().write(messageResponseJSON);
