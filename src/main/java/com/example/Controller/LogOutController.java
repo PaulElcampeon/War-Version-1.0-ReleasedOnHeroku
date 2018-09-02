@@ -6,18 +6,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
 
-@Controller
+@RestController
 public class LogOutController {
 
     WarriorDaoServiceImplementation warriorDaoServiceImplementation = new WarriorDaoServiceImplementation();
 
 
     @RequestMapping(value="/logout/{name}", method= RequestMethod.PUT)
-    public void login(@RequestBody Map<String, String> userDetails, org.apache.catalina.servlet4preview.http.HttpServletRequest req, HttpServletResponse res)throws IOException {
+    public void logout(@RequestBody Map<String, String> userDetails, org.apache.catalina.servlet4preview.http.HttpServletRequest req, HttpServletResponse res)throws IOException {
         LocationPrinter.printLocation("LOGOUT");
         String[] servletPath = req.getServletPath().split("/");
         String name = servletPath[2];
