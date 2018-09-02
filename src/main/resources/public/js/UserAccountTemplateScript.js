@@ -374,6 +374,8 @@ function populateActiveOperationsDiv(operationData) {
 
     if (checkIfUserHasOperations()) {
 
+        setEverythingToLocked();
+
         document.getElementById("previousOperationResults").innerHTML = "";
 
         console.log("POPULATING ACTIVE OPERATIONS DIV");
@@ -480,6 +482,7 @@ function directResponse(data) {
 
         console.log(warriorData);
         console.log("we have removed the operation");
+        setEverythingToUnlocked();
 
         saveUserDetails(warriorData);
 
@@ -832,7 +835,7 @@ document.getElementById("healWarrior").addEventListener("click",() => {
 
     if (isOnOperation) {
 
-        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
+//        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
 
     } else {
 
@@ -846,7 +849,7 @@ document.getElementById("operationListBtn").addEventListener("click",() => {
 
     if (isOnOperation) {
 
-        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
+//        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
 
     } else {
 
@@ -859,7 +862,7 @@ document.getElementById("getBagBtn").addEventListener("click",() => {
 
     if (isOnOperation) {
 
-        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
+//        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
 
     } else {
 
@@ -940,7 +943,7 @@ document.getElementById("shopBtn").addEventListener("click",() => {
 
     if (isOnOperation) {
 
-        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
+//        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
 
     } else {
 
@@ -951,7 +954,15 @@ document.getElementById("shopBtn").addEventListener("click",() => {
 
 document.getElementById("rankbtn").addEventListener("click",() => {
 
+    if (isOnOperation) {
+
+//        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
+
+    } else {
+
         location.href = "./Rankboard.html";
+
+    }
 
 });
 
@@ -1052,4 +1063,35 @@ function hideBagWeaponArmourAttAndDefDivs() {
     armourDiv.style.display = "none";
     attackAndDefenseStatsDiv.style.display = "none";
 
+}
+
+
+function setEverythingToLocked() {
+
+    document.getElementById("shopBtn").style.border = "thick solid #ff0000";
+    document.getElementById("healWarrior").style.border = "thick solid #ff0000";
+    document.getElementById("operationListBtn").style.border = "thick solid #ff0000";
+    document.getElementById("getBagBtn").style.border = "thick solid #ff0000";
+    document.getElementById("warriorListExceptBtn").style.border = "thick solid #ff0000";
+
+    document.getElementById("shopBtn").innerHTML = "SHOP<br>LOCKED";
+    document.getElementById("healWarrior").innerHTML = "GET MEDICAL TREATMENT<br>LOCKED";
+    document.getElementById("operationListBtn").innerHTML = "GO ON AN OPERATION<br>LOCKED";
+    document.getElementById("getBagBtn").innerHTML = "BAG<br>LOCKED";
+    document.getElementById("warriorListExceptBtn").innerHTML = "FIGHT A WARRIOR<br>LOCKED";
+}
+
+function setEverythingToUnlocked() {
+
+    document.getElementById("shopBtn").style.border = "thick solid #FFFFFF";
+    document.getElementById("healWarrior").style.border = "thick solid #FFFFFF";
+    document.getElementById("operationListBtn").style.border = "thick solid #FFFFFF";
+    document.getElementById("getBagBtn").style.border = "thick solid #FFFFFF";
+    document.getElementById("warriorListExceptBtn").style.border = "thick solid #FFFFFF";
+
+    document.getElementById("shopBtn").innerHTML = "SHOP";
+    document.getElementById("healWarrior").innerHTML = "GET MEDICAL TREATMENT";
+    document.getElementById("operationListBtn").innerHTML = "GO ON AN OPERATION";
+    document.getElementById("getBagBtn").innerHTML = "BAG";
+    document.getElementById("warriorListExceptBtn").innerHTML = "FIGHT A WARRIOR";
 }

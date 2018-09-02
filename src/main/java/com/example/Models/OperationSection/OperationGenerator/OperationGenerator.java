@@ -2,7 +2,7 @@ package com.example.Models.OperationSection.OperationGenerator;
 
 import com.example.EnumTypes.ItemType;
 import com.example.Models.OperationSection.Operation.Operation;
-
+import com.example.Models.OperationSection.OperationImages.OperationImages;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -72,7 +72,7 @@ public class OperationGenerator {
     }
 
     public static String generateImage() {
-        return "";
+        return OperationImages.get();
     }
 
     public static String generateName() {
