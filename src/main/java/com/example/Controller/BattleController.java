@@ -40,7 +40,7 @@ public class BattleController {
         battleServiceImplementation.startBattleAll(aggressor, defender);
         this.updateVictorsLevelAndTitle(battleServiceImplementation);
         this.battleResultsCommentry(battleServiceImplementation);
-//        this.updateFightersInDB();
+        this.updateFightersInDB();
         HashMap<String, Object> battleDetails = new HashMap<>();
         battleDetails.put("warrior", aggressor);
         battleDetails.put("AttackersDamagePattern", battleServiceImplementation.getAttacksDamagePattern());
