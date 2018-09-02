@@ -12,7 +12,17 @@ function formingUserData(){
 
     let username1 = document.getElementById("user").value;
     let password1 = document.getElementById("pass").value;
-    data = {username: username1, password: password1};
+
+    if (username1 == "" || password1 == "") {
+
+        passwordIncorrectWarning.innerHTML = "ENTER A USERNAME AND PASSWORD";
+        return passwordIncorrectWarning.style.display = "inline";
+
+    } else {
+
+        data = {username: username1, password: password1};
+
+    }
 
 }
 
@@ -21,6 +31,7 @@ function direction(data) {
 
     if (data == "failure") {
 
+        passwordIncorrectWarning. innerHTML = "PASSWORD INCORRECT";
         return passwordIncorrectWarning.style.display = "inline";
 
     } else if (data == "admin") {

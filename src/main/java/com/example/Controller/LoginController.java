@@ -25,7 +25,7 @@ public class LoginController {
         LocationPrinter.printLocation("LOGIN");
         String clients_username = userDetails.get("username");
         String clients_password = userDetails.get("password");
-        System.out.println("PASSWORD "+clients_password);
+        System.out.println("PASSWORD " + clients_password);
         InitializeResponse.initialize(res);
         String responseAsString = loginServiceImplementation.checkCredentials(clients_username, clients_password);
         System.out.println("DATA WE ARE SENDING AFTER LOGIN ATTEMPT");
