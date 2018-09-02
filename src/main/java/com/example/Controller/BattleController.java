@@ -27,8 +27,8 @@ public class BattleController {
     private static ExperienceServiceImplementation experienceServiceImplementation = new ExperienceServiceImplementation();
     private static LevelingServiceImplementation levelingServiceImplementation = new LevelingServiceImplementation();
     private static TitleServiceImplemented titleServiceImplemented = new TitleServiceImplemented();
-    private Warrior aggressor = null;
-    private Warrior defender = null;
+    private Warrior aggressor;
+    private Warrior defender;
     private Gson gson = new Gson();
 
     //possible could change this end point to /battle/fight/{aggressor}/{defender} (we will use their names)
@@ -56,12 +56,12 @@ public class BattleController {
     }
 
     private void battleResultsCommentry(BattleServiceImplementation battleServiceImplementation){
-        System.out.println("warrior with new title "+battleServiceImplementation.getVictor());
-        System.out.println("TITLE FOR VICTOR IS "+battleServiceImplementation.getVictor());
-        System.out.println("VICTOR: "+battleServiceImplementation.getVictor());
-        System.out.println("LOSER: "+battleServiceImplementation.getLoser());
-        System.out.println("AGGRESSOR: "+aggressor);
-        System.out.println("DEFENDER: "+defender);
+        System.out.println("warrior with new title " + battleServiceImplementation.getVictor());
+        System.out.println("TITLE FOR VICTOR IS " + battleServiceImplementation.getVictor());
+        System.out.println("VICTOR: " + battleServiceImplementation.getVictor());
+        System.out.println("LOSER: " + battleServiceImplementation.getLoser());
+        System.out.println("AGGRESSOR: " + aggressor);
+        System.out.println("DEFENDER: " + defender);
     }
 
     private void updateVictorsLevelAndTitle(BattleServiceImplementation battleServiceImplementation){

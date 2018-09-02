@@ -32,11 +32,22 @@ public class WarriorDaoV3Mongo {
     }
 
     public Warrior updateObject(String name, Object object) {
+
+        System.out.println("Updating " + name);
         String warriorJSON = gson.toJson(object);
         BasicDBObject updatedDBObject = (BasicDBObject) JSON.parse(warriorJSON);
         BasicDBObject query = new BasicDBObject("name", name);
         coll.update(query, updatedDBObject);
         return (Warrior) object;
+    }
+
+    public void logOut(String name) {
+        BasicDBObject query = new BasicDBObject("name", name);
+        BasicDBObject updateFields = new BasicDBObject();
+        updateFields.append("isOnline", false);
+        BasicDBObject setQuery = new BasicDBObject();
+        setQuery.append("$set", updateFields);
+        coll.update(query, setQuery);
     }
 
     public void removeObject(String name) {
@@ -147,5 +158,11 @@ public class WarriorDaoV3Mongo {
         coll.drop();
     }
 
+//    public String save(SubDepartment subDepartment){
+//
+//        String id=subDepartment.getSubDepartmentId();
+//        subDepartment.setModifiedOn();
+//        mongoTemplate.updateFirst(new Query(Criteria.where("_id").is(id)), new Update("modifiedOn"), SubDepartment.class);
+//        mongoTemplate.save(subDepartment, subDepartmentCollection);
 
 }

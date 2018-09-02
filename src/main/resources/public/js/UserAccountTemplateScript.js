@@ -357,8 +357,8 @@ function logout() {
 
     console.log("LOGGING OUT");
 
-    warriorData.isOnline = false;
-    saveUserDetails(warriorData);
+//    warriorData.isOnline = false;
+    logOutWarrior();
     sessionStorage.removeItem("warriorData");
 
     try {
@@ -467,10 +467,11 @@ function directResponse(data) {
         }
 
         warriorData = data.avatar;
-        warriorData.operationList[0].isActive = false;
-        console.log("WE HAVE SET THE OPERATION isActive TO FALSE");
-        warriorData.isOnOperation = false;
-        console.log("WE HAVE SET THE isOnOperation TO FALSE");
+//        warriorData.operationList[0].isActive = false;
+//        console.log("WE HAVE SET THE OPERATION isActive TO FALSE");
+//        warriorData.isOnOperation = false;
+//        console.log("WE HAVE SET THE isOnOperation TO FALSE");
+
         activeOperationsDiv.innerHTML = "";
         activeOperationTitle.style.display = "block";
         activeOperationResults.style.display = "block";
@@ -482,7 +483,12 @@ function directResponse(data) {
         console.log("we have removed the operation");
         setEverythingToUnlocked();
 
-        saveUserDetails(warriorData);
+        setSessionStorage(JSON.stringify(warriorData));
+        setWarriorData(warriorData);
+        populateUserInfoDiv(warriorData);
+        populateActiveOperationsDiv(warriorData);
+
+//        saveUserDetails(warriorData);
 
 //        setWarriorData(warriorData);
 //        populateUserInfoDiv(warriorData);
@@ -611,6 +617,25 @@ function saveUserDetails(data) {
             populateUserInfoDiv(data);
             populateActiveOperationsDiv(data);
         })
+}
+
+
+function logOutWarrior() {
+
+    let url = 'https://war-version-0.herokuapp.com/logout/' + warriorName;
+
+    fetch(url, {
+        method:'PUT',
+        body: JSON.stringify(data),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    })
+//        .then(res => res.json())
+//        .catch(error => console.error('Error:', error))
+//        .then((data) => {
+//
+//        })
 }
 
 

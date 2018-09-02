@@ -69,6 +69,8 @@ public class GoOnOperationController {
         Long endTimeLong = Long.parseLong(endTimeString);
         if(new Date().getTime() > endTimeLong){
             System.out.println("OPERATION COMPLETE");//need to sort this out here so that user doesnt get duplicate items
+            playerAvatar.setOnOperation(false);
+            playerAvatar.getOperationList().get(0).setActive(false);
             if(playerAvatar.getOperationList().get(0).isSuccessful()){
                 OperationRewardIssuer.issueOperationRewards(playerAvatar);
                 warriorDaoServiceImplementation.updateObject(playerAvatar.getName(), playerAvatar);
