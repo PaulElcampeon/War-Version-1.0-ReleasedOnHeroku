@@ -724,7 +724,8 @@ function checkIfElixirHasRunOut(data){
         mode: 'no-cors',
         body: JSON.stringify(data),
         headers:{
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json; charset=utf-8',
+//            "Content-Type" : "text/plain"
         }
     })
         .then(res => res.json())
