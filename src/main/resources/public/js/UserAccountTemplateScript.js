@@ -149,7 +149,7 @@ function displayWarriorList(data) {
     }
 
     for(let j = 0; j < warriorListSize; j++) {
-       arrayOfDivElements[j].innerHTML = data[j].name + " " + data[j].healthPoints;
+       arrayOfDivElements[j].innerHTML = "Name: " + data[j].name + " Level: " + data[j].level + " HP: " + data[j].healthPoints + "<br>";
        arrayOfButtonElements[j].addEventListener("click",() => {
            let fightersNames = {attacker:warriorName, defender:data[j].name};
            sessionStorage.setItem("fighters", JSON.stringify(fightersNames));
