@@ -626,7 +626,7 @@ function logOutWarrior() {
 
     fetch(url, {
         method:'PUT',
-        body: JSON.stringify(data),
+//        body: JSON.stringify(data),
         headers:{
             'Content-Type': 'application/json'
         }
