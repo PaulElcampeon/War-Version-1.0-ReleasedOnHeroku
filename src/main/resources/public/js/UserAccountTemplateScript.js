@@ -620,7 +620,7 @@ function saveUserDetails(data) {
 }
 
 
-function logOutWarrior() {
+function logOutWarrior(data) {
 
     let url = 'https://war-version-0.herokuapp.com/logout/' + warriorName;
 
