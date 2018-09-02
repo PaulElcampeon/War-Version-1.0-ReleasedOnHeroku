@@ -381,10 +381,10 @@ function populateActiveOperationsDiv(operationData) {
         console.log("POPULATING ACTIVE OPERATIONS DIV");
         console.log(operationData);
 
-        activeOperationTitle.style.display = "none";
+//        activeOperationTitle.style.display = "none";
         activeOperationResults.style.display = "none";
         activeOperationsDiv.innerHTML = "";
-        activeOperationTitle.innerHTML = "ACTIVE OPERATION";
+//        activeOperationTitle.innerHTML = "ACTIVE OPERATION";
 
         for (let i = 0; i < operationData.length; i++) {
 

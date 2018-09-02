@@ -96,7 +96,7 @@ document.getElementById("backToUserProfileBtn").addEventListener("click",() => {
 
 document.getElementById("backToLeaderBoardBtn").addEventListener("click", () => {
 
-     location.href ="./LeaderBoard.html";
+     location.href ="./Rankboard.html";
 
 });
 

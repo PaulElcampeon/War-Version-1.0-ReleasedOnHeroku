@@ -33,7 +33,7 @@ function populateOperationProfile(data) {
     nameHolder.innerHTML = "Operation: " + data.name;
     levelHolder.innerHTML = "Level: " + data.level;
     durationHolder.innerHTML = "Duration: " + data.duration + " minutes";
-    imageHolder.src = data.image;
+    imageHolder.src = data.imageUrl;
     experienceHolder.innerHTML = "Experience: " + data.experience;
     moneyHolder.innerHTML = "Money: £" + data.money;
     checkIfBagIsFull();
