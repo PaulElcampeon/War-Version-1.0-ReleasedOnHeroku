@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Map;
@@ -17,14 +18,15 @@ public class LogOutController {
     WarriorDaoServiceImplementation warriorDaoServiceImplementation = new WarriorDaoServiceImplementation();
 
 
-    @RequestMapping(value="/logout/{name}", method = RequestMethod.PUT)
-    public void logout(@RequestBody Map<String, String> userDetails, org.apache.catalina.servlet4preview.http.HttpServletRequest req, HttpServletResponse res)throws IOException {
+    @RequestMapping(value = "/logout/{name}", method = RequestMethod.PUT)
+    public void logout(@RequestBody Map<String, String> userDetails, HttpServletRequest req, HttpServletResponse res)throws IOException {
         LocationPrinter.printLocation("LOGOUT");
         String[] servletPath = req.getServletPath().split("/");
         String name = servletPath[2];
-        Warrior warrior = (Warrior) warriorDaoServiceImplementation.getObject(name);
-        warrior.setOnline(false);
-        warriorDaoServiceImplementation.updateObject(name, warrior);
+        warriorDaoServiceImplementation.logout(name);
+//        Warrior warrior = (Warrior) warriorDaoServiceImplementation.getObject(name);
+//        warrior.setOnline(false);
+//        warriorDaoServiceImplementation.updateObject(name, warrior);
 //        String clients_username = userDetails.get("username");
 //        String clients_password = userDetails.get("password");
 //        System.out.println("PASSWORD " + clients_password);
