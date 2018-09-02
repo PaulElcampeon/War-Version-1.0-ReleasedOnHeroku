@@ -622,7 +622,7 @@ function saveUserDetails(data) {
 
 function logOutWarrior(data) {
 
-    let url = 'https://war-version-0.herokuapp.com/logout/' + warriorName;
+    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior/' + warriorName;
 
     fetch(url, {
         method:'PUT',
@@ -631,11 +631,11 @@ function logOutWarrior(data) {
             'Content-Type': 'application/json'
         }
     })
-//        .then(res => res.json())
-//        .catch(error => console.error('Error:', error))
-//        .then((data) => {
-//
-//        })
+        .then(res => res.json())
+        .catch(error => console.error('Error:', error))
+        .then((data) => {
+
+        })
 }
 
 

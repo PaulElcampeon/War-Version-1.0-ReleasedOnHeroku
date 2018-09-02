@@ -144,4 +144,18 @@ public class WarriorController {
         response.put("message","success");
         res.getWriter().write(gson.toJson(response));
     }
+
+    @RequestMapping(value="/api/logout/warrior/{you}", method=RequestMethod.PUT)
+    public void logoutWarrior(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        LocationPrinter.printLocation("LOGOUT WARRIOR");
+        servletPath = req.getServletPath().split("/");
+        idOfOject = servletPath[4];
+        Warrior warrior = (Warrior) warriorDaoServiceImplementation.getObject(idOfOject);
+        warrior.setOnline(false);
+        warriorDaoServiceImplementation.updateObject(warrior.getName(), warrior);
+//        warriorDaoServiceImplementation.logout(idOfOject);
+        String jsonStringOfWarriorList = gson.toJson(warrior);
+        InitializeResponse.initialize(res);
+        res.getWriter().write(jsonStringOfWarriorList);
+    }
 }
