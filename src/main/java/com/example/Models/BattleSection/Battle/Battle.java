@@ -163,8 +163,15 @@ public class Battle {
 
     public void updateBothPlayersInDB() {
         WarriorDaoServiceImplementation warriorDaoServiceImplementation = new WarriorDaoServiceImplementation();
-        warriorDaoServiceImplementation.updateObject(this.attacker.getName(), this.attacker);
-        warriorDaoServiceImplementation.updateObject(this.defender.getName(), this.defender);
+
+        Warrior warriorDefender = (Warrior) warriorDaoServiceImplementation.getObject(defender.getName());
+        warriorDefender.setBattleReceipts(defender.getBattleReceipts());
+
+        Warrior warriorAttacker = (Warrior) warriorDaoServiceImplementation.getObject(attacker.getName());
+        warriorDefender.setBattleReceipts(attacker.getBattleReceipts());
+
+        warriorDaoServiceImplementation.updateObject(warriorDefender.getName(), warriorDefender);
+        warriorDaoServiceImplementation.updateObject(warriorAttacker.getName(),warriorAttacker);
     }
 
 
