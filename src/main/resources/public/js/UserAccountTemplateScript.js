@@ -949,9 +949,9 @@ document.getElementById("shopBtn").addEventListener("click",() => {
 });
 
 
-document.getElementById("leaderBoardBtn").addEventListener("click", () => {
+document.getElementById("rankbtn").addEventListener("click",() => {
 
-    location.href = "./LeaderBoard.html";
+        location.href = "./Rankboard.html";
 
 });
 
