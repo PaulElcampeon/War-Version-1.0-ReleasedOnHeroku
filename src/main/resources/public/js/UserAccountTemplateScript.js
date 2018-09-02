@@ -959,15 +959,7 @@ document.getElementById("shopBtn").addEventListener("click",() => {
 
 document.getElementById("rankbtn").addEventListener("click",() => {
 
-    if (isOnOperation) {
-
-//        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
-
-    } else {
-
-        location.href = "./Rankboard.html";
-
-    }
+    location.href = "./Rankboard.html";
 
 });
 

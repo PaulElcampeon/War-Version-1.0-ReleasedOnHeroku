@@ -1,12 +1,11 @@
 package com.example.EnumTypes;
 
 public enum DurationType {
-    ZERO(0),
-    SUPER_SHORT(1),
+    SUPER_SHORT(2),
     SHORT(5),
-    MEDIUM(10),
-    LONG(15),
-    SUPER_LONG(30);
+    MEDIUM(8),
+    LONG(10),
+    SUPER_LONG(15);
 
     private final int value;
 

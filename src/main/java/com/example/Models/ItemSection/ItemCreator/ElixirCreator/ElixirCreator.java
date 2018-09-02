@@ -16,7 +16,7 @@ public class ElixirCreator {
     private static ElixirType elixirType = elixirTypes[rand.nextInt(2)];
     private static String imageUrl;
     private static DurationType[] durationTypes = DurationType.values(); //10 minutes
-    private static DurationType durationType = durationTypes[rand.nextInt(2)];
+    private static DurationType durationType = durationTypes[rand.nextInt(durationTypes.length)];
     private static int level = (new Random().nextInt(3)) + 1;
     private static Elixir elixir;
     private static double probability = new Random().nextDouble();

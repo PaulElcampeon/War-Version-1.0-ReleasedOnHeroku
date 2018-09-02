@@ -14,7 +14,7 @@ public class Elixir {
     private String name;
     private String imageUrl = "https://thumbs.dreamstime.com/b/cartoon-glass-bottle-green-stopper-56186105.jpg";
     private ElixirType typeOfElixir;
-    private int duration = DurationType.ZERO.getValue();
+    private int duration = 0;
     private ItemType typeOfItem = ItemType.ELIXIR;
 
 
