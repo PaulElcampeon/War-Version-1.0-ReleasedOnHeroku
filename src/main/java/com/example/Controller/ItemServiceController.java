@@ -8,8 +8,6 @@ import com.example.Models.Warrior.Warrior;
 import com.example.Services.DaoServices.WarriorDaoServiceImplementation;
 import com.example.Services.ItemServices.ItemServiceImplemented;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import netscape.javascript.JSObject;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
