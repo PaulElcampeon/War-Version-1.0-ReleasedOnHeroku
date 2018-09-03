@@ -4,6 +4,7 @@ package com.example.Models.ItemSection.Elixir;
 import com.example.EnumTypes.DurationType;
 import com.example.EnumTypes.ElixirType;
 import com.example.EnumTypes.ItemType;
+
 import lombok.Data;
 
 @Data
@@ -72,8 +73,5 @@ public class Elixir {
     }
 
 
-    public String toString() {
-        return "Name: "+this.name+", Type: "+this.typeOfElixir+", Amount: "+this.amount+", Duration: "+this.duration+", Image Url: "+this.imageUrl;
-    }
 
 }
