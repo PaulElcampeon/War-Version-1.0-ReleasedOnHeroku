@@ -367,7 +367,7 @@ function logout() {
         alert("NO OTHER USER DATA")
     }
 
-    location.href = './index.html';
+//    location.href = './index.html';
 }
 
 function populateActiveOperationsDiv(operationData) {
@@ -598,6 +598,9 @@ function logOutWarrior(data) {
         .then(res => res.json())
         .catch(error => console.error('Error:', error))
         .then((data) => {
+
+            location.href = './index.html';
+
 
         })
 }
