@@ -236,6 +236,8 @@ function fightInitializer(aggressor, defender) {
     console.log(defendersHP);
 
     let data = {aggressorName: aggressor , defenderName: defender};
+    console.log("data we are sending")
+    console.log(data);
     fight(data);
 
 }

@@ -40,7 +40,7 @@ public class BattleController {
         battleServiceImplementation.startBattleAll(aggressor, defender);
         this.updateVictorsLevelAndTitle(battleServiceImplementation);
         this.battleResultsCommentry(battleServiceImplementation);
-//        this.updateFightersInDB();
+        this.updateFightersInDB();
         HashMap<String, Object> battleDetails = new HashMap<>();
         battleDetails.put("warrior", aggressor);
         battleDetails.put("AttackersDamagePattern", battleServiceImplementation.getAttacksDamagePattern());
@@ -65,15 +65,15 @@ public class BattleController {
     }
 
     private void updateVictorsLevelAndTitle(BattleServiceImplementation battleServiceImplementation){
-        Warrior victor = (Warrior) warriorDaoServiceImplementation.getObject(battleServiceImplementation.getVictor());
+//        Warrior victor = (Warrior) warriorDaoServiceImplementation.getObject(battleServiceImplementation.getVictor());
 
         experienceServiceImplementation.setExperienceFromBattle(battleServiceImplementation.returnBattle());
         levelingServiceImplementation.levelUp(battleServiceImplementation.getVictor());
         titleServiceImplemented.issueTitle(battleServiceImplementation.getVictor());
-        victor.setExperiencePoints((battleServiceImplementation.getVictor().getExperiencePoints()));
-        victor.setLevel((battleServiceImplementation.getVictor().getLevel()));
-        victor.setTitle((battleServiceImplementation.getVictor().getTitle()));
-        warriorDaoServiceImplementation.updateObject(victor.getName(), victor);
+//        victor.setExperiencePoints((battleServiceImplementation.getVictor().getExperiencePoints()));
+//        victor.setLevel((battleServiceImplementation.getVictor().getLevel()));
+//        victor.setTitle((battleServiceImplementation.getVictor().getTitle()));
+//        warriorDaoServiceImplementation.updateObject(victor.getName(), victor);
 
     }
 
@@ -82,9 +82,9 @@ public class BattleController {
         defender = (Warrior) warriorDaoServiceImplementation.getObject(namesOfFighters.get("defenderName"));
     }
 
-//    private void updateFightersInDB(){
-//
-//        warriorDaoServiceImplementation.updateObject(aggressor.getName(), aggressor);
-//        warriorDaoServiceImplementation.updateObject(defender.getName(), defender);
-//    }
+    private void updateFightersInDB(){
+
+        warriorDaoServiceImplementation.updateObject(aggressor.getName(), aggressor);
+        warriorDaoServiceImplementation.updateObject(defender.getName(), defender);
+    }
 }
