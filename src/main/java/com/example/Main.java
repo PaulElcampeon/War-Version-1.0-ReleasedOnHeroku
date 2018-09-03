@@ -1,14 +1,6 @@
 package com.example;
 
-import com.example.Dao.Mongo.WarriorDaoV3Mongo;
-import com.example.Models.BattleSection.Battle.Battle;
 import com.example.Models.CheckForInactiveUsers.CheckForInactiveUsers;
-import com.example.Models.Warrior.Warrior;
-import com.example.Services.BattleServices.BattleServiceImplementation;
-import com.example.Services.DaoServices.WarriorDaoServiceImplementation;
-import com.example.Services.ExperienceServices.ExperienceServiceImplementation;
-import com.example.Services.LevelingServices.LevelingServiceImplementation;
-import com.example.Services.TitleServices.TitleServiceImplemented;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.io.IOException;

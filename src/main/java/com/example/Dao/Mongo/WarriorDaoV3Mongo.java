@@ -18,7 +18,7 @@ public class WarriorDaoV3Mongo {
     public WarriorDaoV3Mongo() {
         this.mongoClient = new MongoClient( new MongoClientURI("mongodb://PaulOladele:Elcampeon3@ds141872.mlab.com:41872/war-v-1-0"));
 
-//        this.mongoClient = new MongoClient( "ds141872.mlab.com", 41872);
+//        this.mongoClient = new MongoClient( "localhost", 27017);
         this.db = mongoClient.getDB( "war-v-1-0" );
         DBCollection coll = db.getCollection("WarriorCollection");
         this.coll = db.getCollection("WarriorCollection");

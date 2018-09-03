@@ -37,6 +37,10 @@ function ready () {
     getUserDetails(attackersName, "A");
     getUserDetails(defendersName, "D");
     setInterval(checkWhenUserWasLastActive, 300000)//5 minutes
+    console.log("attackers name and defenders name");
+    console.log(attackersName);
+
+    console.log(defendersName);
 
 }
 
