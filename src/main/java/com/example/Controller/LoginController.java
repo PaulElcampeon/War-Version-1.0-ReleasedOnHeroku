@@ -19,7 +19,7 @@ public class LoginController {
 
     @RequestMapping(value="/", method=RequestMethod.GET)
     public String homePage(){
-        return "Home.html";
+        return "index.html";
     }
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
