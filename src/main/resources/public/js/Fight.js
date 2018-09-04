@@ -1,7 +1,7 @@
 var attackersName, defendersName, attackersHPHolder, defendersHPHolder, attackersHP, defendersHP,
     attackersDamageP, defendersDamageP, engageBtnDiv, backToUserProfileDiv, healthPointsBarSize,
     multiplierForWarriorA, multiplierForWarriorD, vsDiv, attackersTurn, defendersTurn, defendersData,
-    attackersData, indexOfDamagePatternA, indexOfDamagePatternD, warriorData;
+    attackersData, indexOfDamagePatternA, indexOfDamagePatternD;
 
 indexOfDamagePatternA = 0;
 indexOfDamagePatternD = 0;
@@ -30,17 +30,13 @@ if (document.readyState !== 'loading') {
 
 
 function ready () {
-    warriorData = JSON.parse(sessionStorage.getItem("warriorData"))
+
     let fightersDetails = JSON.parse(sessionStorage.getItem("fighters"));
     attackersName = fightersDetails.attacker;
     defendersName = fightersDetails.defender;
     getUserDetails(attackersName, "A");
     getUserDetails(defendersName, "D");
     setInterval(checkWhenUserWasLastActive, 300000)//5 minutes
-    console.log("attackers name and defenders name");
-    console.log(attackersName);
-
-    console.log(defendersName);
 
 }
 
@@ -236,17 +232,18 @@ function fightInitializer(aggressor, defender) {
     console.log(defendersHP);
 
     let data = {aggressorName: aggressor , defenderName: defender};
-    console.log("data we are sending")
-    console.log(data);
     fight(data);
 
 }
+
 
 function logout() {
 
     console.log("LOGGING OUT");
 
-    logOutWarrior(warriorData);
+//    warriorData.isOnline = false;
+//    saveUserDetails(warriorData);
+    logoutWarrior(warriorData);
     sessionStorage.removeItem("warriorData");
 
     try {
@@ -255,10 +252,8 @@ function logout() {
         alert("NO OTHER USER DATA")
     }
 
-    location.href = './index.html';
+//    location.href = './index.html';
 }
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////REQUESTS///////////////////////////////////////////
@@ -279,27 +274,27 @@ function getUserDetails(id, type) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            console.log(data);
-            populateUserInfoDiv(data, type);
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log(data);
+    populateUserInfoDiv(data, type);
 
-            if (type == "A") {
+    if (type == "A") {
 
-                multiplierForWarriorA = healthPointsBarSize/attackersHP;
-                attackersData = data;
-                console.log("Multiplier for A");
-                console.log(multiplierForWarriorA);
+        multiplierForWarriorA = healthPointsBarSize/attackersHP;
+        attackersData = data;
+        console.log("Multiplier for A");
+        console.log(multiplierForWarriorA);
 
-            } else {
+    } else {
 
-                multiplierForWarriorD = healthPointsBarSize/defendersHP;
-                defendersData = data;
-                console.log("Multiplier for D");
-                console.log(multiplierForWarriorD);
+        multiplierForWarriorD = healthPointsBarSize/defendersHP;
+        defendersData = data;
+        console.log("Multiplier for D");
+        console.log(multiplierForWarriorD);
 
-            }
-        })
+    }
+})
 }
 
 
@@ -317,28 +312,25 @@ function fight(data) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-
-            sessionStorage.setItem("warriorData", JSON.stringify(data.warrior));
-            warriorData = data.warrior;
-            console.log("DATA FROM FIGHT REQUEST");
-            console.log(data.warrior);//aggressor
-            console.log("Attackers Damage Pattern");
-            console.log(data.AttackersDamagePattern);
-            console.log("Defenders Damage Pattern");
-            console.log(data.DefendersDamagePattern);
-            attackersDamageP = data.AttackersDamagePattern;
-            defendersDamageP = data.DefendersDamagePattern;
-            myInterval = setInterval(simulateFightPreparation, 2000);
-         })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        sessionStorage.setItem("warriorData", JSON.stringify(data.warrior));
+    console.log("DATA FROM FIGHT REQUEST");
+    console.log(data.warrior);//aggressor
+    console.log("Attackers Damage Pattern");
+    console.log(data.AttackersDamagePattern);
+    console.log("Defenders Damage Pattern");
+    console.log(data.DefendersDamagePattern);
+    attackersDamageP = data.AttackersDamagePattern;
+    defendersDamageP = data.DefendersDamagePattern;
+    myInterval = setInterval(simulateFightPreparation, 2000);
+})
 }
 
 
+function logoutWarrior(data) {
 
-function logOutWarrior(data) {
-
-    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior/' + warriorData.name;
+    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior';
 
     fetch(url, {
         method:'PUT',
@@ -348,13 +340,14 @@ function logOutWarrior(data) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log(data);
+    location.href = './index.html';
 
-        })
+
+})
 }
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////BUTTON EVENT LISTENERS//////////////////////////////////////
@@ -364,9 +357,9 @@ function logOutWarrior(data) {
 document.getElementById("engageBtn").addEventListener("click",() => {
 
     fightInitializer(attackersName, defendersName);
-    vsDiv.style.display = "block";
-    engageBtnDiv.style.display = "none";
-    backToUserProfileDiv.style.display = "none";
+vsDiv.style.display = "block";
+engageBtnDiv.style.display = "none";
+backToUserProfileDiv.style.display = "none";
 
 });
 
@@ -378,9 +371,9 @@ document.getElementById("backToUserProfileBtn").addEventListener("click",() => {
 });
 
 
- ////////////////////////////////////////////////////////////////////////////////////////
- //////FUNCTION TO CHECK USERS ACTIVITY IF MORE THAN 15 MINUTES INACTIVE LOG OUT/////////
- ///////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+//////FUNCTION TO CHECK USERS ACTIVITY IF MORE THAN 15 MINUTES INACTIVE LOG OUT/////////
+///////////////////////////////////////////////////////////////////////////////////////
 
 
 function checkWhenUserWasLastActive() {
@@ -389,15 +382,15 @@ function checkWhenUserWasLastActive() {
 
         logout();
 
-     }
+    }
 }
 
 
 function setLastActive() {
 
-     lastActive = new Date().getTime();
-     console.log((new Date(lastActive)).toDateString());
-     console.log(lastActive);
+    lastActive = new Date().getTime();
+    console.log((new Date(lastActive)).toDateString());
+    console.log(lastActive);
 
 }
 
@@ -407,19 +400,15 @@ function setLastActive() {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
- document.onclick = function(event) {
+document.onclick = function(event) {
 
     if (event === undefined) {
-         //do nothing
-     } else {
+        //do nothing
+    } else {
 
-         event = window.event;
-         var target= 'target' in event? event.target : event.srcElement;
-         setLastActive();
+        event = window.event;
+        var target= 'target' in event? event.target : event.srcElement;
+        setLastActive();
 
-     }
- };
-
-
-
-
+    }
+};

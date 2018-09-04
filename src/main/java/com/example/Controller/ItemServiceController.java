@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 @RestController
 public class ItemServiceController {
+
+    //CHECKED AND READY FOR HEROKU
 
     private static WarriorDaoServiceImplementation warriorDaoServiceImplementation = new WarriorDaoServiceImplementation();
     private static ItemServiceImplemented itemServiceImplemented = new ItemServiceImplemented();
@@ -29,64 +32,112 @@ public class ItemServiceController {
 
     @RequestMapping(value="equip/armour/{itemPositionInBag}", method= RequestMethod.PUT)
     public void equipArmour(@RequestBody Object object, HttpServletRequest req, HttpServletResponse res) throws IOException {
+
         LocationPrinter.printLocation("EQUIP ARMOUR");
+
         servletPath = req.getServletPath().split("/");
+
         itemPositionInBag = Integer.parseInt(servletPath[3]);
+
         objectAsString = gson.toJson(object);
-        userAvatar = gson.fromJson(objectAsString,Warrior.class);
+
+        userAvatar = gson.fromJson(objectAsString, Warrior.class);
+
         Warrior warrior = (Warrior) warriorDaoServiceImplementation.getObject(userAvatar.getName());
-        itemServiceImplemented.equipArmour(warrior,warrior.getBag().getArmourBag().get(itemPositionInBag));
-        System.out.println("THE WARRIOR IS " + warrior + " THE ID IS " + warrior.getId());
+
+        warrior.setLastActive(String.valueOf(new Date().getTime()));
+
+        itemServiceImplemented.equipArmour(warrior, warrior.getBag().getArmourBag().get(itemPositionInBag));
+
         userAvatar = (Warrior)warriorDaoServiceImplementation.updateObject(warrior.getName(), warrior);
+
         InitializeResponse.initialize(res);
-        String userAvatarJSON = gson.toJson(userAvatar);
+
+        String userAvatarJSON = gson.toJson(warrior);
+
         res.getWriter().write(userAvatarJSON);
     }
 
     @RequestMapping(value="equip/weapon/{itemPositionInBag}", method= RequestMethod.PUT)
     public void equipWeapon(@RequestBody Object object, HttpServletRequest req, HttpServletResponse res) throws IOException {
+
         LocationPrinter.printLocation("EQUIP WEAPON");
+
         servletPath = req.getServletPath().split("/");
+
         itemPositionInBag = Integer.parseInt(servletPath[3]);
+
         objectAsString = gson.toJson(object);
+
         userAvatar = gson.fromJson(objectAsString, Warrior.class);
+
         Warrior warrior = (Warrior) warriorDaoServiceImplementation.getObject(userAvatar.getName());
-        itemServiceImplemented.equipWeapon(warrior,warrior.getBag().getWeaponBag().get(itemPositionInBag));
+
+        warrior.setLastActive(String.valueOf(new Date().getTime()));
+
+        itemServiceImplemented.equipWeapon(warrior, warrior.getBag().getWeaponBag().get(itemPositionInBag));
+
         warriorDaoServiceImplementation.updateObject(warrior.getName(), warrior);
+
         InitializeResponse.initialize(res);
+
         String userAvatarJSON = gson.toJson(warrior);
+
         res.getWriter().write(userAvatarJSON);
     }
 
     @RequestMapping(value="use/elixir/{itemPositionInBag}", method= RequestMethod.PUT)
     public void useElixir(@RequestBody Object object, HttpServletRequest req, HttpServletResponse res) throws IOException {
+
         LocationPrinter.printLocation("USE ELIXIR");
+
         servletPath = req.getServletPath().split("/");
+
         itemPositionInBag = Integer.parseInt(servletPath[3]);
+
         objectAsString = gson.toJson(object);
+
         userAvatar = gson.fromJson(objectAsString,Warrior.class);
+
         Warrior warrior = (Warrior) warriorDaoServiceImplementation.getObject(userAvatar.getName());
-        ElixirConsummation.consume(warrior,warrior.getBag().getElixirBag().get(itemPositionInBag));
+
+        warrior.setLastActive(String.valueOf(new Date().getTime()));
+
+        ElixirConsummation.consume(warrior, warrior.getBag().getElixirBag().get(itemPositionInBag));
+
         warriorDaoServiceImplementation.updateObject(warrior.getName(), warrior);
+
         InitializeResponse.initialize(res);
-        String warriorJSON = gson.toJson(warrior);
-        res.getWriter().write(warriorJSON);
+
+        String userAvatarJSON = gson.toJson(warrior);
+
+        res.getWriter().write(userAvatarJSON);
     }
 
-    @RequestMapping(value="check/elixir", method= RequestMethod.POST)
+    @RequestMapping(value="check/elixir", method= RequestMethod.PUT)
     public void checkIfElixirAffectHasRunOut(@RequestBody Warrior warrior, HttpServletRequest req, HttpServletResponse res) throws IOException {
         LocationPrinter.printLocation("CHECK IF ELIXIR HAS RUN OUT");
+
         Warrior warrior1 = (Warrior) warriorDaoServiceImplementation.getObject(warrior.getName());
 
+        warrior1.setLastActive(String.valueOf(new Date().getTime()));
+
         if (warrior1.getElixirAmount() != 0) {
+
             System.out.println("WARRIOR HAS ELIXIR AMOUNT");
+
             CheckIfElixirHasRunOut.check(warrior1);
+
         }
 
         warriorDaoServiceImplementation.updateObject(warrior1.getName(), warrior1);
+
         InitializeResponse.initialize(res);
+
         String userAvatarJSON = gson.toJson(warrior1);
+
         System.out.println("WHAT WE ARE SENDING BACK FROM CHECK ELIXIR CONTROLLER " + userAvatarJSON);
+
         res.getWriter().write(userAvatarJSON);
     }
 

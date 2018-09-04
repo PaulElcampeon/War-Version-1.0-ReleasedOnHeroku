@@ -27,31 +27,49 @@ public class BattleController {
     private static ExperienceServiceImplementation experienceServiceImplementation = new ExperienceServiceImplementation();
     private static LevelingServiceImplementation levelingServiceImplementation = new LevelingServiceImplementation();
     private static TitleServiceImplemented titleServiceImplemented = new TitleServiceImplemented();
-    private Warrior aggressor;
-    private Warrior defender;
+    private Warrior aggressor = null;
+    private Warrior defender = null;
     private Gson gson = new Gson();
 
     //possible could change this end point to /battle/fight/{aggressor}/{defender} (we will use their names)
     @RequestMapping(value="/battle/fight", method=RequestMethod.POST)
     public void fight(@RequestBody HashMap<String,String> namesOfFighters, HttpServletRequest req, HttpServletResponse res) throws IOException {
+
         LocationPrinter.printLocation("BATTLE");
+
         System.out.println("NAME OF FIGHTERS: " + namesOfFighters);
+
         this.getFightersAsObjects(namesOfFighters);
+
         battleServiceImplementation.startBattleAll(aggressor, defender);
+
         this.updateVictorsLevelAndTitle(battleServiceImplementation);
+
         this.battleResultsCommentry(battleServiceImplementation);
+
         this.updateFightersInDB();
+
         HashMap<String, Object> battleDetails = new HashMap<>();
+
         battleDetails.put("warrior", aggressor);
+
         battleDetails.put("AttackersDamagePattern", battleServiceImplementation.getAttacksDamagePattern());
+
         battleDetails.put("DefendersDamagePattern", battleServiceImplementation.getDefendersDamagePattern());
+
         System.out.println("Attacks Damage Pattern: " + battleServiceImplementation.getAttacksDamagePattern());
+
         System.out.println("Defenders Damage Pattern: " + battleServiceImplementation.getDefendersDamagePattern());
+
         String battleDetailsJSON = gson.toJson(battleDetails);
+
         InitializeResponse.initialize(res);
+
         //Making sure to empty the array
         battleServiceImplementation.getAttacksDamagePattern().clear();
+
         battleServiceImplementation.getDefendersDamagePattern().clear();
+
         res.getWriter().write(battleDetailsJSON);
     }
 
@@ -65,26 +83,26 @@ public class BattleController {
     }
 
     private void updateVictorsLevelAndTitle(BattleServiceImplementation battleServiceImplementation){
-//        Warrior victor = (Warrior) warriorDaoServiceImplementation.getObject(battleServiceImplementation.getVictor());
 
         experienceServiceImplementation.setExperienceFromBattle(battleServiceImplementation.returnBattle());
-        levelingServiceImplementation.levelUp(battleServiceImplementation.getVictor());
-        titleServiceImplemented.issueTitle(battleServiceImplementation.getVictor());
-//        victor.setExperiencePoints((battleServiceImplementation.getVictor().getExperiencePoints()));
-//        victor.setLevel((battleServiceImplementation.getVictor().getLevel()));
-//        victor.setTitle((battleServiceImplementation.getVictor().getTitle()));
-//        warriorDaoServiceImplementation.updateObject(victor.getName(), victor);
 
+        levelingServiceImplementation.levelUp(battleServiceImplementation.getVictor());
+
+        titleServiceImplemented.issueTitle(battleServiceImplementation.getVictor());
     }
 
     private void getFightersAsObjects(HashMap<String,String> namesOfFighters){
+
         aggressor = (Warrior) warriorDaoServiceImplementation.getObject(namesOfFighters.get("aggressorName"));
+
         defender = (Warrior) warriorDaoServiceImplementation.getObject(namesOfFighters.get("defenderName"));
     }
 
     private void updateFightersInDB(){
 
         warriorDaoServiceImplementation.updateObject(aggressor.getName(), aggressor);
+
         warriorDaoServiceImplementation.updateObject(defender.getName(), defender);
     }
+
 }

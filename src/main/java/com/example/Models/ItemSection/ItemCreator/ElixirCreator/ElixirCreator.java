@@ -9,6 +9,8 @@ import java.util.Random;
 
 public class ElixirCreator {
 
+    //CHECKED AND READY FOR HEROKU
+
     //CHECKED
     //TESTED
     private static Random rand = new Random();
@@ -44,6 +46,7 @@ public class ElixirCreator {
         if(elixirType == ElixirType.DEFENSE) {
             elixir = new Elixir("Defense Potion", elixirType, 10 * level, durationType, imageUrl, level);
         }
+
         return elixir;
     }
 
@@ -59,6 +62,5 @@ public class ElixirCreator {
             level = 3;
         }
     }
-
 
 }

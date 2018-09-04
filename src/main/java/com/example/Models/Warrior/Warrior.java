@@ -1,4 +1,5 @@
 package com.example.Models.Warrior;
+
 import com.example.EnumTypes.ArmourType;
 import com.example.EnumTypes.ElixirType;
 import com.example.EnumTypes.TitleEnum;
@@ -8,13 +9,16 @@ import com.example.Models.ItemSection.Bag.Bag;
 import com.example.Models.ItemSection.Weapon.Weapon;
 import com.example.Models.OperationSection.Operation.Operation;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
+
 import java.util.ArrayList;
 import java.util.Random;
 
 @Data
 public class Warrior {
 
+    //CHECKED ALL GOOD FOR HEROKU
     private int id;
     private int healthPointsGoal = 100;
     private int healthPoints = 100;
@@ -54,8 +58,14 @@ public class Warrior {
     public Warrior() {}
 
     public Warrior(String name, String password) {
-        this.password = password;
         this.name = name;
+        this.password = password;
+    }
+
+    public Warrior(String name, String password, String imageUrl) {
+        this.name = name;
+        this.password = password;
+        this.imageUrl = imageUrl;
     }
 
     public Warrior(String name, int healthPoints) {
@@ -113,16 +123,15 @@ public class Warrior {
                 System.out.println("YOU GOT A CRITICAL HIT");
                 return this.getTotalTopDamage() * criticalHitAmount;
             }
-                System.out.println("RANDOM NUMBER GENERATOR FOR CHANCE TO HIT");
-                System.out.println(chanceToHitProbability);
-                System.out.println("YOU HIT");
+            System.out.println("RANDOM NUMBER GENERATOR FOR CHANCE TO HIT");
+            System.out.println(chanceToHitProbability);
+            System.out.println("YOU HIT");
 
-                double newAttack = (new Random().nextDouble()) * this.getTotalTopDamage();
-                return (newAttack < this.getTotalBottomDamage()) ? this.getTotalBottomDamage() : newAttack;
+            double newAttack = (new Random().nextDouble()) * this.getTotalTopDamage();
+            return (newAttack < this.getTotalBottomDamage()) ? this.getTotalBottomDamage() : newAttack;
         }
         System.out.println("YOU MISSED YOUR ATTACK");
         return 0;
     }
-
 
 }

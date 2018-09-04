@@ -13,27 +13,45 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 
 @RestController
 public class HospitalController {
 
+    //CHECKED AND READY FOR HEROKU
     private static WarriorDaoServiceImplementation warriorDaoServiceImplementation = new WarriorDaoServiceImplementation();
     private Gson gson = new Gson();
 
     @RequestMapping(value="/hospital/fullheal", method=RequestMethod.POST)
     public void healWarrior(@RequestBody Object object, HttpServletRequest req, HttpServletResponse res) throws IOException {
+
         LocationPrinter.printLocation("HOSPITAL");
+
         String userAvatarAsString = gson.toJson(object);
+
         Warrior userAvatarAsWarriorObject = gson.fromJson(userAvatarAsString, Warrior.class);
-        Warrior warrior1 = (Warrior) warriorDaoServiceImplementation.getObject(userAvatarAsWarriorObject.getName());
-        Hospital.healWarrior(warrior1);
+
+        Warrior warrior = (Warrior) warriorDaoServiceImplementation.getObject(userAvatarAsWarriorObject.getName());
+
+        Hospital.healWarrior(warrior);
+
         System.out.println("JUST GOT HEALED IN HOSPITAL");
-        warriorDaoServiceImplementation.updateObject(warrior1.getName(), warrior1);
+
+        //MAKE SURE WE UPDATE THE LAST ACTIVE TIME FOR WARRIOR
+        warrior.setLastActive(String.valueOf(new Date().getTime()));
+
+        warriorDaoServiceImplementation.updateObject(warrior.getName(), warrior);
+
         System.out.println("SAVED DATA");
-        String jsonStringOfUserAvatar = gson.toJson(warrior1);
+
+        String jsonStringOfUserAvatar = gson.toJson(warrior);
+
         System.out.println(jsonStringOfUserAvatar);
+
         InitializeResponse.initialize(res);
+
         res.getWriter().write(jsonStringOfUserAvatar);
+
         System.out.println("SENDING DATA BACK FROM HOSPITAL");
     }
 }

@@ -33,7 +33,7 @@ function populateOperationProfile(data) {
     nameHolder.innerHTML = "Operation: " + data.name;
     levelHolder.innerHTML = "Level: " + data.level;
     durationHolder.innerHTML = "Duration: " + data.duration + " minutes";
-    operationProfileImageHolder.src = data.imageUrl;
+    imageHolder.src = data.imageUrl;
     experienceHolder.innerHTML = "Experience: " + data.experience;
     moneyHolder.innerHTML = "Money: £" + data.money;
     checkIfBagIsFull();
@@ -44,16 +44,17 @@ function logout() {
 
     console.log("LOGGING OUT");
 
-    logOutWarrior(warriorData);
+    warriorData.isOnline = false;
+    saveUserDetails(warriorData);
     sessionStorage.removeItem("warriorData");
 
     try {
         sessionStorage.removeItem("otherUser");
-    } catch(err) {
-        alert("NO OTHER USER DATA")
     }
-
-    location.href = './index.html';
+    catch(err) {
+        alert("NO OTHER USER DATA");
+    }
+    location.href = './index.html'
 }
 
 
@@ -90,17 +91,17 @@ function goOnOperation(data) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            console.log("DATA FROM GOONOPERATIONCONTROLLER");
-            direction(data);
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log("DATA FROM GOONOPERATIONCONTROLLER");
+    direction(data);
+})
 }
 
 
-function logOutWarrior(data) {
+function saveUserDetails(data) {
 
-    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior/' + warriorData.name;
+    let url = 'https://war-version-0.herokuapp.com/api/update/warrior';
 
     fetch(url, {
         method:'PUT',
@@ -110,10 +111,10 @@ function logOutWarrior(data) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
+.catch(error => console.error('Error:', error))
+.then((data) => {
 
-        })
+    })
 }
 
 
@@ -133,18 +134,18 @@ document.getElementById("goOnOperationBtn").addEventListener("click",() => {
 
     goOnOperation(operationData);
 
-    //need to send request to mission  end point
-    //player field isOnMission needsto be set to true
-    //this will stop him from being able to engage in any activities like battles or hospital
+//need to send request to mission  end point
+//player field isOnMission needsto be set to true
+//this will stop him from being able to engage in any activities like battles or hospital
 
 });
 
 
 document.getElementById("backToUserProfileBtn").addEventListener("click",() => {
 
-     location.href ="./UserAccountTemplate.html"
+    location.href ="./UserAccountTemplate.html"
 
- });
+});
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////FUNCTION TO CHECK SESSION STORAGE HAS USER INFO//////////////////////
@@ -166,7 +167,7 @@ function checkSessionStorage() {
 
     } else {
 
-        location.href ="./Home.html";
+        location.href ="./index.html";
 
     }
 }

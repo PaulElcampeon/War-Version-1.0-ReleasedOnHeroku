@@ -3,10 +3,12 @@ package com.example.Models.BattleSection.Battle;
 
 import com.example.Models.BattleSection.BattleReceipt.BattleReceipt;
 import com.example.Models.Warrior.Warrior;
-import com.example.Services.DaoServices.WarriorDaoServiceImplementation;
+
 import lombok.Data;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -116,11 +118,11 @@ public class Battle {
 
 
     public void setVictorAndLoser() {
-       if (this.hasAttackerWon()) {
-           this.setAttackAsVictor();
-       }else {
-           this.setDefenderAsVictor();
-       }
+        if (this.hasAttackerWon()) {
+            this.setAttackAsVictor();
+        }else {
+            this.setDefenderAsVictor();
+        }
     }
 
 
@@ -161,27 +163,12 @@ public class Battle {
     }
 
 
-    public void updateBothPlayersInDB() {
-        WarriorDaoServiceImplementation warriorDaoServiceImplementation = new WarriorDaoServiceImplementation();
-
-        Warrior warriorDefender = (Warrior) warriorDaoServiceImplementation.getObject(defender.getName());
-        warriorDefender.setBattleReceipts(defender.getBattleReceipts());
-
-        Warrior warriorAttacker = (Warrior) warriorDaoServiceImplementation.getObject(attacker.getName());
-        warriorDefender.setBattleReceipts(attacker.getBattleReceipts());
-
-        warriorDaoServiceImplementation.updateObject(warriorDefender.getName(), warriorDefender);
-        warriorDaoServiceImplementation.updateObject(warriorAttacker.getName(),warriorAttacker);
-    }
-
-
     public void startBattleAll(Warrior attacker, Warrior defender) {
         this.battlePrep(attacker,defender);
         this.startBattle();
         this.setVictorAndLoser();
         this.createBattleReceipt();
         this.giveBattleReceiptsToBothPlayers();
-        this.updateBothPlayersInDB();
     }
 
 

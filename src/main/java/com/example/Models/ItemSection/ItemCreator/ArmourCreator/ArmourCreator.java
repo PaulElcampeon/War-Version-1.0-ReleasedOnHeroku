@@ -8,7 +8,7 @@ import java.util.Random;
 
 public class ArmourCreator {
 
-    //CHECKED
+    //CHECKED AND READY FOR HEROKU
     //TESTED
     private static Random rand;
     private static ArmourType[] bodyPartsName;
@@ -18,6 +18,7 @@ public class ArmourCreator {
     private static Armour armour;
 
     public static Armour createArmour (int missionLevel, double probability) {
+
         rand = new Random();
         bodyPartsName = ArmourType.values();
         imageUrl = ArmourImages.getImage(bodyPart);

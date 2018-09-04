@@ -123,7 +123,7 @@ function displayBattleReceipts(data) {
     }
 
     for(let j = 0; j < battleReceiptListSize; j++){
-       arrayOfDivElements[j].innerHTML = "Victor: " + data[j].victor+" Loser: " + data[j].loser + " Date: " + data[j].dateOfBattle;
+        arrayOfDivElements[j].innerHTML = "Victor: " + data[j].victor+" Loser: " + data[j].loser + " Date: " + data[j].dateOfBattle;
     }
 
     for(let z = 0; z < battleReceiptListSize; z++){
@@ -149,14 +149,14 @@ function displayWarriorList(data) {
     }
 
     for(let j = 0; j < warriorListSize; j++) {
-       arrayOfDivElements[j].innerHTML = "Name: " + data[j].name + " Level: " + data[j].level + " HP: " + data[j].healthPoints + "<br>";
-       arrayOfButtonElements[j].addEventListener("click",() => {
-           let fightersNames = {attacker:warriorName, defender:data[j].name};
-           sessionStorage.setItem("fighters", JSON.stringify(fightersNames));
-           location.href = "./Fight.html"
-       })
-       arrayOfButtonElements[j].innerHTML = "Fight";
-       arrayOfDivElements[j].appendChild(arrayOfButtonElements[j])
+        arrayOfDivElements[j].innerHTML = data[j].name + "<br> Level: " + data[j].level + "<br> HP: " + data[j].healthPoints + "<br>";
+        arrayOfButtonElements[j].addEventListener("click",() => {
+            let fightersNames = {attacker:warriorName, defender:data[j].name};
+        sessionStorage.setItem("fighters", JSON.stringify(fightersNames));
+        location.href = "./Fight.html"
+    })
+        arrayOfButtonElements[j].innerHTML = "Fight";
+        arrayOfDivElements[j].appendChild(arrayOfButtonElements[j])
     }
 
     for(let z = 0; z < warriorListSize; z++) {
@@ -185,8 +185,8 @@ function displayBag() {
         itemButtons.innerHTML = "EQUIP";
         itemButtons.addEventListener("click",() => {
             equipArmour(warriorData, k);
-            bagDiv.style.display = "none"
-        });
+        bagDiv.style.display = "none"
+    });
 
         let breakTag1 = document.createElement("br");
         let breakTag2 = document.createElement("br");
@@ -212,8 +212,8 @@ function displayBag() {
         itemButtons.innerHTML = "EQUIP";
         itemButtons.addEventListener("click",()=>{
             equipWeapon(warriorData, j);
-            bagDiv.style.display = "none"
-        });
+        bagDiv.style.display = "none"
+    });
 
         let breakTag1 = document.createElement("br");
         let breakTag2 = document.createElement("br");
@@ -239,24 +239,24 @@ function displayBag() {
         itemButtons.innerHTML = "USE";
         itemButtons.addEventListener("click",() => {
             if (warriorData.elixirAmount == 0) {
-                useElixir(warriorData, z);
-                bagDiv.style.display = "none";
+            useElixir(warriorData, z);
+            bagDiv.style.display = "none";
 
-                if (warriorElixirBag[z].typeOfElixir != "HEALTH") {
-                    document.getElementById("elixirAffect").innerHTML = "Elixir Affect: " + warriorElixirBag[z].typeOfElixir + "<br> Expiration Time: " + new Date((new Date()).getTime() + (60000 * warriorElixirBag[z].duration)).toLocaleTimeString();
-                }
-
-                try {
-                    clearInterval(checkElixirInterval);
-                } catch (err) {
-                    console.log(err.message);
-                }
-                checkElixirInterval = setInterval(checkIfElixirHasRunOutPrep, 60000);
-            } else {
-
-                alert("YOU CANT DO THAT YOU HAVE ALREADY CONSUMED AN ELIXIR AND STILL HAVE THE AFFECTS");
+            if (warriorElixirBag[z].typeOfElixir != "HEALTH") {
+                document.getElementById("elixirAffect").innerHTML = "Elixir Affect: " + warriorElixirBag[z].typeOfElixir + "<br> Expiration Time: " + new Date((new Date()).getTime() + (60000 * warriorElixirBag[z].duration)).toLocaleTimeString();
             }
-        });
+
+            try {
+                clearInterval(checkElixirInterval);
+            } catch (err) {
+                console.log(err.message);
+            }
+            checkElixirInterval = setInterval(checkIfElixirHasRunOutPrep, 60000);
+        } else {
+
+            alert("YOU CANT DO THAT YOU HAVE ALREADY CONSUMED AN ELIXIR AND STILL HAVE THE AFFECTS");
+        }
+    });
 
         let breakTag1 = document.createElement("br");
         let breakTag2 = document.createElement("br");
@@ -358,7 +358,8 @@ function logout() {
     console.log("LOGGING OUT");
 
 //    warriorData.isOnline = false;
-    logOutWarrior(warriorData);
+//    saveUserDetails(warriorData);
+    logoutWarrior(warriorData);
     sessionStorage.removeItem("warriorData");
 
     try {
@@ -381,8 +382,10 @@ function populateActiveOperationsDiv(operationData) {
         console.log("POPULATING ACTIVE OPERATIONS DIV");
         console.log(operationData);
 
+        activeOperationTitle.style.display = "none";
         activeOperationResults.style.display = "none";
         activeOperationsDiv.innerHTML = "";
+        activeOperationTitle.innerHTML = "ACTIVE OPERATION";
 
         for (let i = 0; i < operationData.length; i++) {
 
@@ -445,11 +448,9 @@ function checkIfOperationIsCompleteInitializer() {
 
     console.log("INITIALIZING CHECK IF OPERATION IS COMPLETE FUNC");
 
-//    let data = {name: warriorData.name};
-//
-//    checkIfOperationIsComplete(data);
-    checkIfOperationIsComplete();
+    let data = {name: warriorData.name};
 
+    checkIfOperationIsComplete(data);
 }
 
 
@@ -459,6 +460,7 @@ function directResponse(data) {
 
         if (data.success == true) {
             document.getElementById("previousOperationResults").innerHTML = "You have completed your last quest and were successful check your bag for a reward"
+            // confirm("You have completed your operation and were successful");
         }
 
         if (data.success == false) {
@@ -467,21 +469,37 @@ function directResponse(data) {
 
         warriorData = data.avatar;
 
-        activeOperationsDiv.innerHTML = "";
-        activeOperationTitle.style.display = "block";
-        activeOperationResults.style.display = "block";
-        warriorData.operationList.pop();
-
-        clearInterval(myInterval);
-
-        console.log(warriorData);
-        console.log("we have removed the operation");
-        setEverythingToUnlocked();
-
         setSessionStorage(JSON.stringify(warriorData));
         setWarriorData(warriorData);
         populateUserInfoDiv(warriorData);
         populateActiveOperationsDiv(warriorData);
+
+        //THESE SHOULD HAVE ALREADY BEEN DONE ON SERVER SIDE
+//        warriorData.operationList[0].isActive = false;
+//        console.log("WE HAVE SET THE OPERATION isActive TO FALSE");
+//        warriorData.isOnOperation = false;
+//        console.log("WE HAVE SET THE isOnOperation TO FALSE");
+//        warriorData.operationList.pop();
+
+
+        activeOperationsDiv.innerHTML = "";
+        activeOperationTitle.style.display = "block";
+        activeOperationResults.style.display = "block";
+
+        clearInterval(myInterval);
+
+        setEverythingToUnlocked();
+
+        console.log(warriorData);
+        console.log("we have removed the operation");
+
+//        saveUserDetails(warriorData);
+
+//        setWarriorData(warriorData);
+//        populateUserInfoDiv(warriorData);
+//        populateActiveOperationsDiv(warriorOperation);
+////        saveUserDetails(warriorData);
+//        displayBag();
     }
 }
 
@@ -518,27 +536,26 @@ function displayActiveElixir() {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
-function checkIfOperationIsComplete() {
+function checkIfOperationIsComplete(data) {
 
     console.log("SENDING REQUEST TO CHECK IF ACTIVE OPERATION IS COMPLETE");
 
-       let url = "https://war-version-0.herokuapp.com/operationComplete/" + warriorData.name;
+    let url = "https://war-version-0.herokuapp.com/operationComplete/" + warriorData.name;
 
-        fetch(url, {
-            method:'GET',
-            mode: 'no-cors',
-            //body: JSON.stringify(data),
-            headers:{
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .catch(error => console.error('Error:', error))
-            .then(data => {
-                console.log("DATA FROM CHECKING IF ACTIVE OPERATION IS COMPLETE REQUEST");
-                console.log(data);
-                directResponse(data);
-            })
+    fetch(url, {
+        method:'POST',
+        body: JSON.stringify(data),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+.catch(error => console.error('Error:', error))
+.then(data => {
+        console.log("DATA FROM CHECKING IF ACTIVE OPERATION IS COMPLETE REQUEST");
+    console.log(data);
+    directResponse(data);
+})
 }
 
 
@@ -552,14 +569,14 @@ function getWarriorsList() {
         method:'GET'
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            if(data != undefined){
-                console.log("DATA FROM WARRIOR LIST REQUEST");
-                console.log(data);
-                displayWarriorList(data)
-            }
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        if(data != undefined){
+        console.log("DATA FROM WARRIOR LIST REQUEST");
+        console.log(data);
+        displayWarriorList(data)
+    }
+})
 }
 
 
@@ -573,20 +590,64 @@ function getWarriorsListExcept(name) {
         method:'GET'
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            if(data != undefined){
-                console.log("DATA FROM WARRIOR LIST EXCEPT REQUEST");
-                console.log(data);
-                displayWarriorList(data)
-            }
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        if(data != undefined){
+        console.log("DATA FROM WARRIOR LIST EXCEPT REQUEST");
+        console.log(data);
+        displayWarriorList(data)
+    }
+})
 }
 
+function getBattleReceipts(name) {
 
-function logOutWarrior(data) {
+    console.log("GETTING BATTLE RECEIPTS");
 
-    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior/' + warriorName;
+    let url = 'https://war-version-0.herokuapp.com/api/get/warrior/' + name;
+
+    fetch(url, {
+        method:'GET'
+    })
+        .then(res => res.json())
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log("DATA FROM GETTING BATTLE RECEIPTS REQUEST");
+    console.log(data);
+    setWarriorData(data);
+    setSessionStorage(JSON.stringify(data));
+    populateUserInfoDiv(warriorData);
+    displayBattleReceipts(warriorBattleReceipts);
+
+})
+}
+
+//function saveUserDetails(data) {
+//
+//    let url = 'http://localhost:8080/api/update/warrior';
+//
+//    fetch(url, {
+//        method:'PUT',
+//        body: JSON.stringify(data),
+//        headers:{
+//            'Content-Type': 'application/json'
+//        }
+//    })
+//        .then(res => res.json())
+//        .catch(error => console.error('Error:', error))
+//        .then((data) => {
+//            console.log(data);
+//            console.log(warriorData);
+//            setSessionStorage(JSON.stringify(data));
+//            setWarriorData(data);
+//            populateUserInfoDiv(data);
+//            populateActiveOperationsDiv(data);
+//        })
+//}
+
+function logoutWarrior(data) {
+
+    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior';
 
     fetch(url, {
         method:'PUT',
@@ -596,13 +657,13 @@ function logOutWarrior(data) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log(data);
+    location.href = './index.html';
 
-            location.href = './index.html';
 
-
-        })
+})
 }
 
 
@@ -620,14 +681,14 @@ function heal(data) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            console.log("DATA FROM HEAL REQUEST");
-            console.log(data);
-            setWarriorData(data);
-            setSessionStorage(JSON.stringify(data));;
-            populateUserInfoDiv(warriorData);
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log("DATA FROM HEAL REQUEST");
+    console.log(data);
+    setWarriorData(data);
+    setSessionStorage(JSON.stringify(data));;
+    populateUserInfoDiv(warriorData);
+})
 }
 
 
@@ -645,14 +706,14 @@ function equipArmour(data, armourPosition) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            console.log("DATA FROM EQUIPPING ARMOUR REQUEST");
-            console.log(data);
-            setWarriorData(data);
-            setSessionStorage(JSON.stringify(data));
-            populateUserInfoDiv(warriorData);
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log("DATA FROM EQUIPPING ARMOUR REQUEST");
+    console.log(data);
+    setWarriorData(data);
+    setSessionStorage(JSON.stringify(data));
+    populateUserInfoDiv(warriorData);
+})
 }
 
 
@@ -670,14 +731,14 @@ function equipWeapon(data, weaponPosition) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            console.log("DATA FROM EQUIPPING WEAPON REQUEST");
-            console.log(data);
-            setWarriorData(data);
-            setSessionStorage(JSON.stringify(data));
-            populateUserInfoDiv(warriorData);
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log("DATA FROM EQUIPPING WEAPON REQUEST");
+    console.log(data);
+    setWarriorData(data);
+    setSessionStorage(JSON.stringify(data));
+    populateUserInfoDiv(warriorData);
+})
 }
 
 
@@ -695,14 +756,14 @@ function useElixir(data, elixirPosition){
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            console.log("DATA FROM USE ELIXIR REQUEST");
-            console.log(data);
-            setWarriorData(data);
-            setSessionStorage(JSON.stringify(data));
-            populateUserInfoDiv(warriorData);
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log("DATA FROM USE ELIXIR REQUEST");
+    console.log(data);
+    setWarriorData(data);
+    setSessionStorage(JSON.stringify(data));
+    populateUserInfoDiv(warriorData);
+})
 }
 
 
@@ -713,45 +774,22 @@ function checkIfElixirHasRunOut(data){
     let url = "https://war-version-0.herokuapp.com/check/elixir/";
 
     fetch(url, {
-        method: 'POST',
-        mode: 'cors',
+        method:'PUT',
         body: JSON.stringify(data),
         headers:{
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json'
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            console.log("DATA FROM USE ELIXIR REQUEST");
-            console.log(data);
-            checkIfElixirIsOut(data);
-            setWarriorData(data);
-            populateUserInfoDiv(warriorData);
-            setSessionStorage(JSON.stringify(data));
-
-        })
-}
-
-
-function getBattleHistory() {
-
-    console.log("GETTING WARRIOR LIST");
-
-    let url = 'https://war-version-0.herokuapp.com/api/warrior/battlereceipt/' + warriorData.name;
-
-    fetch(url, {
-        method:'GET'
-    })
-        .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-             console.log("DATA FROM WARRIOR BATTLERECEIPT REQUEST");
-             console.log(data);
-             setWarriorData(data)
-             displayBattleReceipts(data.battleReceipts);
-
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log("DATA FROM USE ELIXIR REQUEST");
+    console.log(data);
+    checkIfElixirIsOut(data);
+    setWarriorData(data);
+    setSessionStorage(JSON.stringify(data));
+    populateUserInfoDiv(warriorData);
+})
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -803,17 +841,19 @@ document.getElementById("getBattleHistoryBtn").addEventListener("click",() => {
 
     hideBagWeaponArmourAttAndDefDivs();
 
-    let battleReceiptDiv = document.getElementById("battleReceiptDiv");
+let battleReceiptDiv = document.getElementById("battleReceiptDiv");
 
-    if (battleReceiptDiv.hasChildNodes()) {
+if (battleReceiptDiv.hasChildNodes()) {
 
-        battleReceiptDiv.innerHTML = "";
+    battleReceiptDiv.innerHTML = "";
 
-    } else {
+} else {
 
-        getBattleHistory();
+    getBattleReceipts(warriorName);
 
-    }
+    // displayBattleReceipts(warriorBattleReceipts);
+
+}
 });
 
 
@@ -826,19 +866,18 @@ document.getElementById("warriorListExceptBtn").addEventListener("click",() => {
 
         hideBagWeaponArmourAttAndDefDivs();
 
-        let warriorListDiv = document.getElementById("warriorListDiv");
+let warriorListDiv = document.getElementById("warriorListDiv");
 
-        if(warriorListDiv.hasChildNodes()) {
+if (warriorListDiv.hasChildNodes()) {
 
-            warriorListDiv.innerHTML = "";
+    warriorListDiv.innerHTML = "";
 
-        } else {
+} else {
 
-            getWarriorsListExcept(warriorData.name);
+    getWarriorsListExcept(warriorData.name);
 
-        }
-
-    }
+}
+}
 });
 
 
@@ -853,13 +892,13 @@ document.getElementById("healWarrior").addEventListener("click",() => {
 
     if (isOnOperation) {
 
-//        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
+        // alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
 
     } else {
 
         hideBagWeaponArmourAttAndDefDivs();
-        heal(warriorData);
-    }
+heal(warriorData);
+}
 });
 
 
@@ -867,12 +906,12 @@ document.getElementById("operationListBtn").addEventListener("click",() => {
 
     if (isOnOperation) {
 
-//        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
+        // alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
 
     } else {
 
         location.href="./OperationListTemplate.html"
-    }
+}
 });
 
 
@@ -880,23 +919,23 @@ document.getElementById("getBagBtn").addEventListener("click",() => {
 
     if (isOnOperation) {
 
-//        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
+        // alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
 
     } else {
 
         if (bagDiv.style.display == "none") {
 
-            bagDiv.style.display = "block";
-            weaponDiv.style.display = "none";
-            armourDiv.style.display = "none";
-            attackAndDefenseStatsDiv.style.display = "none";
+    bagDiv.style.display = "block";
+    weaponDiv.style.display = "none";
+    armourDiv.style.display = "none";
+    attackAndDefenseStatsDiv.style.display = "none";
 
-        } else {
+} else {
 
-            bagDiv.style.display = "none";
+    bagDiv.style.display = "none";
 
-        }
-     }
+}
+}
 });
 
 
@@ -904,16 +943,16 @@ document.getElementById("getArmourBtn").addEventListener("click",() => {
 
     if (armourDiv.style.display == "none") {
 
-        armourDiv.style.display = "block";
-        weaponDiv.style.display = "none";
-        attackAndDefenseStatsDiv.style.display = "none";
-        bagDiv.style.display = "none";
+    armourDiv.style.display = "block";
+    weaponDiv.style.display = "none";
+    attackAndDefenseStatsDiv.style.display = "none";
+    bagDiv.style.display = "none";
 
-    } else {
+} else {
 
-        armourDiv.style.display = "none";
+    armourDiv.style.display = "none";
 
-    }
+}
 
 });
 
@@ -922,15 +961,15 @@ document.getElementById("getWeaponBtn").addEventListener("click",() => {
 
     if (weaponDiv.style.display == "none") {
 
-        weaponDiv.style.display = "block";
-        bagDiv.style.display = "none";
-        armourDiv.style.display = "none";
-        attackAndDefenseStatsDiv.style.display = "none";
+    weaponDiv.style.display = "block";
+    bagDiv.style.display = "none";
+    armourDiv.style.display = "none";
+    attackAndDefenseStatsDiv.style.display = "none";
 
-    } else {
+} else {
 
-        weaponDiv.style.display = "none";
-    }
+    weaponDiv.style.display = "none";
+}
 });
 
 
@@ -938,15 +977,15 @@ document.getElementById("attackAndDefenseStatsBtn").addEventListener("click",() 
 
     if (attackAndDefenseStatsDiv.style.display == "none") {
 
-        attackAndDefenseStatsDiv.style.display = "block";
-        bagDiv.style.display = "none";
-        weaponDiv.style.display = "none";
-        armourDiv.style.display = "none";
+    attackAndDefenseStatsDiv.style.display = "block";
+    bagDiv.style.display = "none";
+    weaponDiv.style.display = "none";
+    armourDiv.style.display = "none";
 
-    } else {
+} else {
 
-        attackAndDefenseStatsDiv.style.display = "none";
-    }
+    attackAndDefenseStatsDiv.style.display = "none";
+}
 });
 
 
@@ -961,18 +1000,18 @@ document.getElementById("shopBtn").addEventListener("click",() => {
 
     if (isOnOperation) {
 
-//        alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
+        // alert("CURRENTLY ON OPERATION, YOU CANNOT DO THIS");
 
     } else {
 
         location.href = "./Shop.html";
-    }
+}
 });
 
 
-document.getElementById("rankbtn").addEventListener("click",() => {
+document.getElementById("leaderBoardBtn").addEventListener("click", () => {
 
-    location.href = "./Rankboard.html";
+    location.href = "./LeaderBoard.html";
 
 });
 
@@ -999,7 +1038,7 @@ function checkSessionStorage() {
 
     } else {
 
-        location.href ="./Home.html";
+        location.href ="./index.html";
     }
 }
 
@@ -1013,7 +1052,7 @@ function checkWhenUserWasLastActive() {
 
     if ((new Date().getTime() - lastActive) >= 900000) {//15 minutes 900000
 
-       logout();
+        logout();
 
     }
 }
@@ -1038,7 +1077,7 @@ document.onclick = function(event) {
 
         event = window.event;
         var target= 'target' in event? event.target : event.srcElement;
-    //    alert('clicked on '+target.tagName);
+        //    alert('clicked on '+target.tagName);
 //        console.log("click on " + target.tagName)
         setLastActive();
 

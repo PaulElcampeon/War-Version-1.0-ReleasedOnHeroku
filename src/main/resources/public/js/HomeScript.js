@@ -55,11 +55,11 @@ function confirmUserCredentials(data) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-             console.log("DATA FROM CONFIRMING CREDENTIALS REQUEST " + data);
-             direction(data.message);
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log("DATA FROM CONFIRMING CREDENTIALS REQUEST " + data);
+    direction(data.message);
+})
 }
 
 
@@ -77,14 +77,14 @@ function saveUserDetails(data){
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            console.log("DATA RECEIVED FROM SAVE DATA REQUEST");
-            console.log(data);
-            sessionStorage.setItem('warriorData', JSON.stringify(data));
-            //dont really want to have this here
-            return location.href = './UserAccountTemplate.html';
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log("DATA RECEIVED FROM SAVE DATA REQUEST");
+    console.log(data);
+    sessionStorage.setItem('warriorData', JSON.stringify(data));
+    //dont really want to have this here
+    return location.href = './UserAccountTemplate.html';
+})
 }
 
 
@@ -97,40 +97,40 @@ document.getElementById("login").addEventListener("click",() => {
 
     if (username1.value == "" || password1.value == "") {
 
-         passwordIncorrectWarning.innerHTML = "ENTER A USERNAME AND PASSWORD";
-         return passwordIncorrectWarning.style.display = "inline";
+    passwordIncorrectWarning.innerHTML = "ENTER A USERNAME AND PASSWORD";
+    return passwordIncorrectWarning.style.display = "inline";
 
-    } else {
+} else {
 
-        formingUserData();
-        confirmUserCredentials(data);
+    formingUserData();
+    confirmUserCredentials(data);
 
-    }
+}
 
 });
 
 
 document.getElementById("createAccount").addEventListener("click",() => {
 
-    console.log("you clicked me")
-    location.href = './CreateAccountTemplate.html';
+    console.log("you clicked me");
+location.href = './CreateAccountTemplate.html';
 
 });
 
 
 document.getElementById("playAudioBtn").addEventListener("click", () => {
 
-    if(isMusicPlaying == false) {
+    if (isMusicPlaying == false) {
 
-        playAudio1();
-        isMusicPlaying = true;
+    playAudio1();
+    isMusicPlaying = true;
 
-    } else {
+} else {
 
-        pauseAudio1();
-        isMusicPlaying = false;
+    pauseAudio1();
+    isMusicPlaying = false;
 
-    }
+}
 });
 
 ///////////////////////////////////////////////////////////////////////////////////////

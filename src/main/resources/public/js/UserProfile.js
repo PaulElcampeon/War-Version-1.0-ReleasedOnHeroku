@@ -46,18 +46,38 @@ function populateUserInfoDiv(data) {
 function logout() {
 
     console.log("LOGGING OUT");
-    warriorData.isOnline = false;
-    saveUserDetails(warriorData);
+//    warriorData.isOnline = false;
+    logoutWarrior(warriorData);
 
- }
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////REQUESTS///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 
-function saveUserDetails(data) {
+//function saveUserDetails(data) {
+//
+//    let url = 'http://localhost:8080/api/update/warrior';
+//
+//    fetch(url, {
+//        method:'PUT',
+//        body: JSON.stringify(data),
+//        headers:{
+//            'Content-Type': 'application/json'
+//        }
+//    })
+//        .then(res => res.json())
+//        .catch(error => console.error('Error:', error))
+//        .then((data) => {
+//            sessionStorage.removeItem("warriorData");
+//            sessionStorage.removeItem("otherUser");
+//            location.href = './index.html'
+//        })
+//}
 
-    let url = 'https://war-version-0.herokuapp.com/api/update/warrior';
+function logoutWarrior(data) {
+
+    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior';
 
     fetch(url, {
         method:'PUT',
@@ -67,12 +87,13 @@ function saveUserDetails(data) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            sessionStorage.removeItem("warriorData");
-            sessionStorage.removeItem("otherUser");
-            location.href = './index.html'
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log(data);
+    location.href = './index.html';
+
+
+})
 }
 
 
@@ -90,13 +111,13 @@ document.getElementById("logoutBtn").addEventListener("click",() => {
 
 document.getElementById("backToUserProfileBtn").addEventListener("click",() => {
 
-     location.href ="./UserAccountTemplate.html"
+    location.href ="./UserAccountTemplate.html"
 
 });
 
 document.getElementById("backToLeaderBoardBtn").addEventListener("click", () => {
 
-     location.href ="./Rankboard.html";
+    location.href ="./LeaderBoard.html";
 
 });
 

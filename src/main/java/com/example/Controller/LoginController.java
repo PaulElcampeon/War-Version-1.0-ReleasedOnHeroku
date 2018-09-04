@@ -13,23 +13,34 @@ import java.util.Map;
 @org.springframework.stereotype.Controller
 public class LoginController {
 
+    //CHECKED AND READY FOR HEROKU
+
     private static LoginServiceImplementation loginServiceImplementation = new LoginServiceImplementation();
 
     @RequestMapping(value="/", method=RequestMethod.GET)
     public String homePage(){
-        return "index.html";
+        return "Home.html";
     }
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
     public void login(@RequestBody Map<String, String> userDetails, org.apache.catalina.servlet4preview.http.HttpServletRequest req, HttpServletResponse res)throws IOException {
+
         LocationPrinter.printLocation("LOGIN");
+
         String clients_username = userDetails.get("username");
+
         String clients_password = userDetails.get("password");
-        System.out.println("PASSWORD " + clients_password);
+
+        System.out.println("PASSWORD "+clients_password);
+
         InitializeResponse.initialize(res);
+
         String responseAsString = loginServiceImplementation.checkCredentials(clients_username, clients_password);
+
         System.out.println("DATA WE ARE SENDING AFTER LOGIN ATTEMPT");
+
         System.out.println(responseAsString);
+
         res.getWriter().write(responseAsString);
     }
 

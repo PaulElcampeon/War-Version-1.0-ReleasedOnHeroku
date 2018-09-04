@@ -21,38 +21,36 @@ function populatePage(data){
             "<br> Chance Of Success: "+data[i].chanceOfSuccess+" (If same level as operation)";
         listOfButtons[i].addEventListener("click",()=>{
             sessionStorage.setItem('operationData', JSON.stringify(data[i]));
-            location.href="./OperationProfile.html"
-        })
+        location.href="./OperationProfile.html"
+    })
     }
 
     for(let i = data.length; i < 10; i++){
         listOfButtons[i].style.display = "none";
-     }
+    }
 }
 
 function next10(){
 
     getOperationList();
- }
-
-
-function logout() {
-
-    console.log("LOGGING OUT");
-
-    logOutWarrior(warriorData);
-    sessionStorage.removeItem("warriorData");
-
-    try {
-        sessionStorage.removeItem("otherUser");
-    } catch(err) {
-        alert("NO OTHER USER DATA")
-    }
-
-    location.href = './index.html';
 }
 
 
+function logout(){
+    console.log("LOGGING OUT");
+//    warriorData.isOnline = false;
+//    saveUserDetails(warriorData)
+    logoutWarrior(warriorData);
+    sessionStorage.removeItem("warriorData");
+    try {
+        sessionStorage.removeItem("otherUser");
+    }
+    catch(err) {
+        alert("NO OTHER USER DATA")
+    }
+
+//    location.href = './index.html'
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////REQUESTS///////////////////////////////////////////
@@ -61,20 +59,19 @@ function logout() {
 function getOperationList(){
     let url = "https://war-version-0.herokuapp.com/api/get/operation/random/"+warriorData.level;
     fetch(url, {
-            method:'GET'
-        })
-            .then(res => res.json())
-            .catch(error => console.error('Error:', error))
-            .then((data) => {
-                console.log(data)
-                populatePage(data)
-            })
+        method:'GET'
+    })
+        .then(res => res.json())
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log(data)
+    populatePage(data)
+})
 }
 
+function logoutWarrior(data) {
 
-function logOutWarrior(data) {
-
-    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior/' + warriorData.name;
+    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior';
 
     fetch(url, {
         method:'PUT',
@@ -84,59 +81,61 @@ function logOutWarrior(data) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log(data);
+    location.href = './index.html';
 
-        })
+
+})
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////FUNCTION TO CHECK SESSION STORAGE HAS USER INFO//////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 
- function checkSessionStorage(){
-     warriorData = JSON.parse(sessionStorage.getItem("warriorData"));
-     if(warriorData != null){
+function checkSessionStorage(){
+    warriorData = JSON.parse(sessionStorage.getItem("warriorData"));
+    if(warriorData != null){
         getOperationList();
-     }else{
-         location.href ="./Home.html"
-     }
+    }else{
+        location.href ="./index.html"
+    }
 
- }
+}
 
- ///////////////////////////////////////////////////////////////////////////////////////
- ///////////////////////////BUTTON EVENT LISTENERS//////////////////////////////////////
- ///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////BUTTON EVENT LISTENERS//////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
 
- document.getElementById("backToUserProfileBtn").addEventListener("click",()=>{
-     location.href ="./UserAccountTemplate.html"
- })
+document.getElementById("backToUserProfileBtn").addEventListener("click",()=>{
+    location.href ="./UserAccountTemplate.html"
+})
 
 document.getElementById("logoutBtn").addEventListener("click",()=>{
     logout();
 })
 
- document.getElementById("next10").addEventListener("click",()=>{
+document.getElementById("next10").addEventListener("click",()=>{
     next10();
- })
+})
 
 
- ////////////////////////////////////////////////////////////////////////////////////////
- //////FUNCTION TO CHECK USERS ACTIVITY IF MORE THAN 15 MINUTES INACTIVE LOG OUT/////////
- ///////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+//////FUNCTION TO CHECK USERS ACTIVITY IF MORE THAN 15 MINUTES INACTIVE LOG OUT/////////
+///////////////////////////////////////////////////////////////////////////////////////
 
 function checkWhenUserWasLastActive() {
-     if ((new Date().getTime() - lastActive) >= 900000) {//15 minutes 900000
+    if ((new Date().getTime() - lastActive) >= 900000) {//15 minutes 900000
         logout();
-     }
+    }
 }
 
 function setLastActive() {
-     lastActive = new Date().getTime();
-     console.log((new Date(lastActive)).toDateString())
-     console.log(lastActive);
- }
+    lastActive = new Date().getTime();
+    console.log((new Date(lastActive)).toDateString())
+    console.log(lastActive);
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -144,12 +143,12 @@ function setLastActive() {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
- document.onclick = function(event) {
-     if (event === undefined) {
-         //do nothing
-     } else {
-         event = window.event;
-         var target= 'target' in event? event.target : event.srcElement;
-         setLastActive();
-     }
- };
+document.onclick = function(event) {
+    if (event === undefined) {
+        //do nothing
+    } else {
+        event = window.event;
+        var target= 'target' in event? event.target : event.srcElement;
+        setLastActive();
+    }
+};

@@ -39,8 +39,8 @@ function displayWarriorList(data) {
         button.innerHTML = "MORE";
         button.addEventListener("click", () => {
             sessionStorage.setItem("otherUserData",JSON.stringify(data[i]));
-            location.href = "./UserProfile.html"
-        });
+        location.href = "./UserProfile.html"
+    });
 
         div.appendChild(p);
         div.appendChild(breakTag1);
@@ -54,10 +54,10 @@ function displayWarriorList(data) {
 
 function increaseUpperLimitBy10() {
 
-     upperLimit += 10;
-     lowerLimit += 10;
-     console.log("Value of upperLimit is");
-     console.log(upperLimit);
+    upperLimit += 10;
+    lowerLimit += 10;
+    console.log("Value of upperLimit is");
+    console.log(upperLimit);
 
 }
 
@@ -72,49 +72,60 @@ function decreaseUpperLimitBy10() {
 }
 
 
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+
+    document.getElementById("myDropdown").classList.toggle("show");
+
+}
+
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+
+    if (!event.target.matches('.dropbtn')) {
+
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+
+        for (i = 0; i < dropdowns.length; i++) {
+
+            var openDropdown = dropdowns[i];
+
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+};
+
+
 function logout() {
 
-     console.log("LOGGING OUT");
-     logOutWarrior(warriorData);
-     sessionStorage.removeItem("warriorData");
+    console.log("LOGGING OUT");
+//     warriorData.isOnline = false;
+//     saveUserDetails(warriorData);
+    logoutWarrior(warriorData);
 
-     try {
+    sessionStorage.removeItem("warriorData");
 
-         sessionStorage.removeItem("otherUser");
+    try {
 
-     } catch(err) {
+        sessionStorage.removeItem("otherUser");
 
-         alert("NO OTHER USER DATA");
+    } catch(err) {
 
-     }
+        alert("NO OTHER USER DATA");
 
-     location.href = './index.html';
- }
+    }
+
+//     location.href = './index.html';
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////REQUESTS////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
-
-
-
-function logOutWarrior(data) {
-
-    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior/' + warriorData.name;
-
-    fetch(url, {
-        method:'PUT',
-        body: JSON.stringify(data),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-
-        })
-}
-
 
 
 function getWarriorsList() {
@@ -127,26 +138,99 @@ function getWarriorsList() {
         method:'GET'
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            console.log("DATA FROM WARRIOR LIST REQUEST");
-            console.log(data);
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log("DATA FROM WARRIOR LIST REQUEST");
+    console.log(data);
 
-            if (data.message == "failure") {
+    if (data.message == "failure") {
 
-                  decreaseUpperLimitBy10();
+        decreaseUpperLimitBy10();
 
-                } else {
+    } else {
 
-                    console.log(data.warriorListData);
-                    displayWarriorList(data.warriorListData);
+        console.log(data.warriorListData);
+        displayWarriorList(data.warriorListData);
 
-                }
-        })
+    }
+})
 }
 
 
+function logoutWarrior(data) {
 
+    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior';
+
+    fetch(url, {
+        method:'PUT',
+        body: JSON.stringify(data),
+        headers:{
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => res.json())
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log(data);
+    location.href = './index.html';
+
+
+})
+}
+
+// function getWarriorListBasedOnLevel() {
+//     console.log("GETTING WARRIOR LIST BASED ON LEVEL");
+//
+//     let url = 'http://localhost:8080/api/getAll/warrior/level';
+//
+//     fetch(url, {
+//         method:'GET'
+//     })
+//         .then(res => res.json())
+//         .catch(error => console.error('Error:', error))
+//         .then((data) => {
+//             console.log("DATA FROM WARRIOR LIST BASED ON LEVEL REQUEST");
+//             console.log(data);
+//
+//             if (data.message == "failure") {
+//
+//                 decreaseUpperLimitBy10();
+//
+//             } else {
+//
+//                 console.log(data.warriorListData);
+//                 displayWarriorList(data.warriorListData);
+//
+//             }
+//         })
+// }
+//
+// function getWarriorListBasedOnVictories() {
+//     console.log("GETTING WARRIOR LIST BASED ON VICTORIES");
+//
+//     let url = 'http://localhost:8080/api/getAll/warrior/victories';
+//
+//     fetch(url, {
+//         method:'GET'
+//     })
+//         .then(res => res.json())
+//         .catch(error => console.error('Error:', error))
+//         .then((data) => {
+//             console.log("DATA FROM WARRIOR LIST BASED ON VICTORIES REQUEST");
+//             console.log(data);
+//
+//             if (data.message == "failure") {
+//
+//                 decreaseUpperLimitBy10();
+//
+//             } else {
+//
+//                 console.log(data.warriorListData);
+//                 displayWarriorList(data.warriorListData);
+//
+//             }
+//         })
+// }
 
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////BUTTON EVENT LISTENERS//////////////////////////////////////
@@ -156,7 +240,7 @@ function getWarriorsList() {
 document.getElementById("next10").addEventListener("click", () => {
 
     increaseUpperLimitBy10();
-    getWarriorsList();
+getWarriorsList();
 
 });
 
@@ -164,13 +248,13 @@ document.getElementById("next10").addEventListener("click", () => {
 document.getElementById("previous10").addEventListener("click", () => {
 
     if (upperLimit == 10) {
-        //do nothing
-    } else {
+    //do nothing
+} else {
 
-        decreaseUpperLimitBy10();
-        getWarriorsList();
+    decreaseUpperLimitBy10();
+    getWarriorsList();
 
-    }
+}
 });
 
 
@@ -183,32 +267,42 @@ document.getElementById("logoutBtn").addEventListener("click",() => {
 
 document.getElementById("backToUserProfileBtn").addEventListener("click",() => {
 
-     location.href ="./UserAccountTemplate.html";
+    location.href ="./UserAccountTemplate.html";
 
- });
+});
 
 
+// document.getElementById("sortByLevel").addEventListener("click", () => {
+//
+//     getWarriorsLisBasedOnLevel();
+// });
+//
+//
+// document.getElementById("sortByVictories").addEventListener("click", () => {
+//
+// });
 
- ////////////////////////////////////////////////////////////////////////////////////////
- //////FUNCTION TO CHECK USERS ACTIVITY IF MORE THAN 15 MINUTES INACTIVE LOG OUT/////////
- ///////////////////////////////////////////////////////////////////////////////////////
 
- function checkWhenUserWasLastActive() {
+////////////////////////////////////////////////////////////////////////////////////////
+//////FUNCTION TO CHECK USERS ACTIVITY IF MORE THAN 15 MINUTES INACTIVE LOG OUT/////////
+///////////////////////////////////////////////////////////////////////////////////////
 
-     if ((new Date().getTime() - lastActive) >= 900000) {//15 minutes 900000
+function checkWhenUserWasLastActive() {
+
+    if ((new Date().getTime() - lastActive) >= 900000) {//15 minutes 900000
 
         logout();
 
-     }
- }
+    }
+}
 
- function setLastActive() {
+function setLastActive() {
 
-     lastActive = new Date().getTime();
-     console.log((new Date(lastActive)).toDateString());
-     console.log(lastActive);
+    lastActive = new Date().getTime();
+    console.log((new Date(lastActive)).toDateString());
+    console.log(lastActive);
 
- }
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -216,14 +310,14 @@ document.getElementById("backToUserProfileBtn").addEventListener("click",() => {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
- document.onclick = function(event) {
+document.onclick = function(event) {
 
-     if (event === undefined) {
-         //do nothing
-     } else {
+    if (event === undefined) {
+        //do nothing
+    } else {
 
-         event = window.event;
-         var target= 'target' in event? event.target : event.srcElement;
-         setLastActive();
-     }
- };
+        event = window.event;
+        var target= 'target' in event? event.target : event.srcElement;
+        setLastActive();
+    }
+};

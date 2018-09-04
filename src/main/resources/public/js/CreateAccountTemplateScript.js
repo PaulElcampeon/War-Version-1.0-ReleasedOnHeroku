@@ -1,12 +1,11 @@
-
 document.getElementById("createAccountBtn").addEventListener("click", () => {
 
-     let username1 = document.getElementById("username").value;
-     let password1 = document.getElementById("password1").value;
-     let password2 = document.getElementById("password2").value;
-     let imageUrl = document.getElementById("imageUrl").value;
-     let data = {username: username1, passwordX: password1, passwordY: password2, image: imageUrl};
-     createAccount(data);
+    let username1 = document.getElementById("username").value;
+let password1 = document.getElementById("password1").value;
+let password2 = document.getElementById("password2").value;
+let imageUrl = document.getElementById("imageUrl").value;
+let data = {username: username1, passwordX: password1, passwordY: password2, image: imageUrl};
+createAccount(data);
 
 });
 
@@ -40,9 +39,9 @@ function createAccount(data) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-         console.log(data);
-         checkData(data);
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log(data);
+    checkData(data);
+})
 }

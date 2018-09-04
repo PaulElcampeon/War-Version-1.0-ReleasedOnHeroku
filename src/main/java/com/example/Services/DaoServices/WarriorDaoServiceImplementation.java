@@ -49,10 +49,6 @@ public class WarriorDaoServiceImplementation implements ServiceImplementationAll
         return warriorDaoV3Mongo.getObjectWithCredentials(property);
     }
 
-    public void logout(String name) {
-        warriorDaoV3Mongo.logOut(name);
-    }
-
 
 
 }

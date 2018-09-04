@@ -7,6 +7,8 @@ import java.util.Date;
 
 public class CheckForInactiveUsers {
 
+    //CHECKED ALL GOOD FOR HEROKU
+
     public static void setToOffLineInActiveUsers() {
         System.out.println("setToOffLineInActiveUsers Thread is running");
 

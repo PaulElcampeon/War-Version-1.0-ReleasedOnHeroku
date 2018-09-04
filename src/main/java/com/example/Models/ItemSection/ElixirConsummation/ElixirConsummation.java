@@ -9,6 +9,8 @@ import java.util.Date;
 
 public class ElixirConsummation {
 
+    //CHECKED ALL GOOD FOR HEROKU
+
     //Possibly we could just create elixirs through a method like createLesserHealthElixer() createHealthElixer() createGreaterHealthElixer()
     public static void consume(Warrior warrior, Elixir elixir) {
 

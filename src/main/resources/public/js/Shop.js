@@ -41,44 +41,44 @@ function populateWithMyItems() {
         let breakTag1 = document.createElement("br");
         let breakTag2 = document.createElement("br");
 
-         nameAndPrice.innerHTML = warriorWeaponBagItems[i].name + "<br> Price: " + warriorWeaponBagItems[i].price;
-         image.src = warriorWeaponBagItems[i].imageUrl;
-         sellButton.innerHTML = "SELL";
-         sellButton.addEventListener("click",() => {
+        nameAndPrice.innerHTML = warriorWeaponBagItems[i].name + "<br> Price: " + warriorWeaponBagItems[i].price;
+        image.src = warriorWeaponBagItems[i].imageUrl;
+        sellButton.innerHTML = "SELL";
+        sellButton.addEventListener("click",() => {
             warriorData.money += warriorData.bag.weaponBag[i].price
-            warriorData.bag.weaponBag.splice(i, 1);
-            console.log(warriorData);
+        warriorData.bag.weaponBag.splice(i, 1);
+        console.log(warriorData);
 //            populateWithMyItems();
-            updateBagAndMoney(warriorData);
-         });
+        saveToBag(warriorData);
+    });
 
-         div.appendChild(nameAndPrice);
-         div.appendChild(breakTag1);
-         div.appendChild(image);
-         div.appendChild(breakTag2);
-         div.appendChild(sellButton);
-         bagItems.appendChild(div);
+        div.appendChild(nameAndPrice);
+        div.appendChild(breakTag1);
+        div.appendChild(image);
+        div.appendChild(breakTag2);
+        div.appendChild(sellButton);
+        bagItems.appendChild(div);
     }
 
     for (let i = 0; i < warriorArmourBagItems.length; i++) {
 
-            let div = document.createElement("div");
-            let nameAndPrice = document.createElement("p");
-            let sellButton = document.createElement("Button");
-            let image = document.createElement("img");
-            let breakTag1 = document.createElement("br");
-            let breakTag2 = document.createElement("br");
+        let div = document.createElement("div");
+        let nameAndPrice = document.createElement("p");
+        let sellButton = document.createElement("Button");
+        let image = document.createElement("img");
+        let breakTag1 = document.createElement("br");
+        let breakTag2 = document.createElement("br");
 
-             nameAndPrice.innerHTML = warriorArmourBagItems[i].name + "<br> Price: " + warriorArmourBagItems[i].price;
-             image.src = warriorArmourBagItems[i].imageUrl;
-             sellButton.innerHTML = "SELL";
-             sellButton.addEventListener("click",()=>{
-                warriorData.money += warriorArmourBagItems[i].price;
-                warriorData.bag.armourBag.splice(i, 1);
-                console.log(warriorData);
+        nameAndPrice.innerHTML = warriorArmourBagItems[i].name + "<br> Price: " + warriorArmourBagItems[i].price;
+        image.src = warriorArmourBagItems[i].imageUrl;
+        sellButton.innerHTML = "SELL";
+        sellButton.addEventListener("click",()=>{
+            warriorData.money += warriorArmourBagItems[i].price;
+        warriorData.bag.armourBag.splice(i, 1);
+        console.log(warriorData);
 //                populateWithMyItems();
-                updateBagAndMoney(warriorData);
-             });
+        saveToBag(warriorData);
+    });
 
         div.appendChild(nameAndPrice);
         div.appendChild(breakTag1);
@@ -103,11 +103,11 @@ function populateWithMyItems() {
         sellButton.innerHTML = "SELL";
         sellButton.addEventListener("click",()=>{
             warriorData.money += warriorElixirBagItems[i].price;
-            warriorData.bag.elixirBag.splice(i, 1);
-            console.log(warriorData);
+        warriorData.bag.elixirBag.splice(i, 1);
+        console.log(warriorData);
 //           populateWithMyItems();
-            updateBagAndMoney(warriorData);
-        });
+        saveToBag(warriorData);
+    });
 
         div.appendChild(nameAndPrice);
         div.appendChild(breakTag1);
@@ -122,17 +122,19 @@ function populateWithMyItems() {
 function logout() {
 
     console.log("LOGGING OUT");
-
-    logOutWarrior(warriorData);
+    logoutWarrior(warriorData);
     sessionStorage.removeItem("warriorData");
 
     try {
+
         sessionStorage.removeItem("otherUser");
+
     } catch(err) {
-        alert("NO OTHER USER DATA")
+
+        alert("NO OTHER USER DATA");
+
     }
 
-    location.href = './index.html';
 }
 
 
@@ -140,9 +142,10 @@ function logout() {
 ///////////////////////////////////REQUESTS///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 
-function logOutWarrior(data) {
 
-    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior/' + warriorData.name;
+function saveToBag(data) {
+
+    let url = 'https://war-version-0.herokuapp.com/api/update/warrior/bag';
 
     fetch(url, {
         method:'PUT',
@@ -152,16 +155,19 @@ function logOutWarrior(data) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log(data);
+    setWarriorData(data);
+    setSessionStorage(data);
+    populateWithMyItems();
+})
 }
 
 
-function updateBagAndMoney(data) {
+function logoutWarrior(data) {
 
-    let url = 'https://war-version-0.herokuapp.com/api/update/warrior/bag/money';
+    let url = 'https://war-version-0.herokuapp.com/api/logout/warrior';
 
     fetch(url, {
         method:'PUT',
@@ -171,13 +177,13 @@ function updateBagAndMoney(data) {
         }
     })
         .then(res => res.json())
-        .catch(error => console.error('Error:', error))
-        .then((data) => {
-            console.log(data);
-            setWarriorData(data);
-            setSessionStorage(data);
-            populateWithMyItems();
-        })
+.catch(error => console.error('Error:', error))
+.then((data) => {
+        console.log(data);
+    location.href = './index.html';
+
+
+})
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -212,7 +218,7 @@ function setSessionStorage(data) {
 document.getElementById("buyBtn").addEventListener("click",() => {
 
     warriorItems.style.display = "none";
-    alert("THIS FEATURE HAS NOT BEEN ADDED YET");
+alert("THIS FEATURE HAS NOT BEEN ADDED YET");
 
 
 });

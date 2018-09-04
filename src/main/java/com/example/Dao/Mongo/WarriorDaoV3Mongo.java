@@ -2,9 +2,12 @@ package com.example.Dao.Mongo;
 
 import com.example.Comparator.WarriorComparator.WarriorComparator;
 import com.example.Models.Warrior.Warrior;
+
 import com.google.gson.Gson;
+
 import com.mongodb.*;
 import com.mongodb.util.JSON;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -32,22 +35,11 @@ public class WarriorDaoV3Mongo {
     }
 
     public Warrior updateObject(String name, Object object) {
-
-        System.out.println("Updating " + name);
         String warriorJSON = gson.toJson(object);
         BasicDBObject updatedDBObject = (BasicDBObject) JSON.parse(warriorJSON);
         BasicDBObject query = new BasicDBObject("name", name);
         coll.update(query, updatedDBObject);
         return (Warrior) object;
-    }
-
-    public void logOut(String name) {
-        BasicDBObject query = new BasicDBObject("name", name);
-        BasicDBObject updateFields = new BasicDBObject();
-        updateFields.append("isOnline", false);
-        BasicDBObject setQuery = new BasicDBObject();
-        setQuery.append("$set", updateFields);
-        coll.update(query, setQuery);
     }
 
     public void removeObject(String name) {
@@ -157,6 +149,7 @@ public class WarriorDaoV3Mongo {
     public void droppingCollection() {
         coll.drop();
     }
+
 
 //    public String save(SubDepartment subDepartment){
 //

@@ -3,6 +3,7 @@ package com.example.Models.ItemSection.Armour;
 
 import com.example.EnumTypes.ArmourType;
 import com.example.EnumTypes.ItemType;
+
 import lombok.Data;
 
 @Data
@@ -38,10 +39,5 @@ public class Armour {
         this.defenseLevel = defenseLevel;
         this.bodyPart = bodyPart;
         this.imageUrl = imageUrl;
-    }
-
-
-    public String toString() {
-        return "Name: "+this.name+", Defense Level: "+this.defenseLevel+", Body Part: "+this.bodyPart+", Image Url: "+this.imageUrl;
     }
 }
