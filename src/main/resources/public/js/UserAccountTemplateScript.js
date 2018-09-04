@@ -837,6 +837,14 @@ function setSessionStorage(data) {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
+
+document.getElementById("rankingboardButton").addEventListener("click", () => {
+
+    location.href = "./Rankingboard.html";
+
+});
+
+
 document.getElementById("getBattleHistoryBtn").addEventListener("click",() => {
 
     hideBagWeaponArmourAttAndDefDivs();
@@ -982,10 +990,11 @@ document.getElementById("attackAndDefenseStatsBtn").addEventListener("click",() 
     weaponDiv.style.display = "none";
     armourDiv.style.display = "none";
 
-} else {
+    } else {
 
     attackAndDefenseStatsDiv.style.display = "none";
-}
+
+    }
 });
 
 
@@ -1005,15 +1014,10 @@ document.getElementById("shopBtn").addEventListener("click",() => {
     } else {
 
         location.href = "./Shop.html";
-}
-});
-
-
-document.getElementById("leaderBoardBtn").addEventListener("click", () => {
-
-    location.href = "./LeaderBoard.html";
+    }
 
 });
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////

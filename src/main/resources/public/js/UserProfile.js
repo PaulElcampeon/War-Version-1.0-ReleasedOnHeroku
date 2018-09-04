@@ -101,6 +101,13 @@ function logoutWarrior(data) {
 ///////////////////////////BUTTON EVENT LISTENERS//////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
 
+document.getElementById("backToLeaderBoardBtn").addEventListener("click", () => {
+
+    location.href ="./Rankingboard.html";
+
+});
+
+
 
 
 document.getElementById("logoutBtn").addEventListener("click",() => {
@@ -109,17 +116,13 @@ document.getElementById("logoutBtn").addEventListener("click",() => {
 
 });
 
+
 document.getElementById("backToUserProfileBtn").addEventListener("click",() => {
 
     location.href ="./UserAccountTemplate.html"
 
 });
 
-document.getElementById("backToLeaderBoardBtn").addEventListener("click", () => {
-
-    location.href ="./LeaderBoard.html";
-
-});
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
