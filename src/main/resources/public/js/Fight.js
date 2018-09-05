@@ -134,19 +134,19 @@ function attackersTurnAction(AttackersDamagePattern) {
         defendersHPHolder.style.width = (((defendersHealth/defendersData.healthPointsGoal) * 100).toFixed(2)) + "%";
         defendersHP -= AttackersDamagePattern[indexOfDamagePatternA];
 
-        if (AttackersDamagePattern[indexOfDamagePatternA] > 0) {
+        // if (AttackersDamagePattern[indexOfDamagePatternA] > 0) {
 
             document.getElementById("defendersHitDisplay").style.visibility = "hidden";
             document.getElementById("attackersHitDisplay").innerHTML = "YOU WERE HIT FOR " + AttackersDamagePattern[indexOfDamagePatternA].toFixed(2);
             document.getElementById("attackersHitDisplay").style.visibility = "visible";
 
-        } else {
-
-            document.getElementById("attackersHitDisplay").style.visibility = "hidden";
-            document.getElementById("defendersHitDisplay").innerHTML = "YOU MISSED YOUR ATTACK";
-            document.getElementById("defendersHitDisplay").style.visibility = "visible";
-
-        }
+        // } else {
+        //
+        //     document.getElementById("attackersHitDisplay").style.visibility = "hidden";
+        //     document.getElementById("defendersHitDisplay").innerHTML = "YOU MISSED YOUR ATTACK";
+        //     document.getElementById("defendersHitDisplay").style.visibility = "visible";
+        //
+        // }
 
         indexOfDamagePatternA++;
     }
@@ -166,20 +166,20 @@ function defendersTurnAction(DefendersDamagePattern) {
         attackersHPHolder.style.width = ((attackersHealth/attackersData.healthPointsGoal) * 100).toFixed(2) + "%";
         attackersHP -=  DefendersDamagePattern[indexOfDamagePatternD];
 
-        if (DefendersDamagePattern[indexOfDamagePatternD] > 0) {
+        // if (DefendersDamagePattern[indexOfDamagePatternD] > 0) {
 
             document.getElementById("attackersHitDisplay").style.visibility = "hidden";
             document.getElementById("defendersHitDisplay").innerHTML = "YOU WERE HIT FOR " + DefendersDamagePattern[indexOfDamagePatternD].toFixed(2);
             document.getElementById("defendersHitDisplay").style.visibility = "visible";
 
-        } else {
-
-            document.getElementById("defendersHitDisplay").style.visibility = "hidden";
-            document.getElementById("attackersHitDisplay").innerHTML = "YOU MISSED YOUR ATTACK";
-            document.getElementById("attackersHitDisplay").style.visibility = "visible";
-
-
-        }
+        // } else {
+        //
+        //     document.getElementById("defendersHitDisplay").style.visibility = "hidden";
+        //     document.getElementById("attackersHitDisplay").innerHTML = "YOU MISSED YOUR ATTACK";
+        //     document.getElementById("attackersHitDisplay").style.visibility = "visible";
+        //
+        //
+        // }
 
         indexOfDamagePatternD++;
     }
