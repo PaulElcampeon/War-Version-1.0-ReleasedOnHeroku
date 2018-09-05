@@ -323,7 +323,15 @@ function fight(data) {
     console.log(data.DefendersDamagePattern);
     attackersDamageP = data.AttackersDamagePattern;
     defendersDamageP = data.DefendersDamagePattern;
-    myInterval = setInterval(simulateFightPreparation, 2000);
+    if (attackersDamageP.length > 30) {
+
+        myInterval = setInterval(simulateFightPreparation, 1000);
+
+    } else {
+
+        myInterval = setInterval(simulateFightPreparation, 2000);
+
+    }
 })
 }
 
